@@ -19,7 +19,7 @@ class Drawer extends Component {
             <List>
                 <ListItem button>
                     <ListItemIcon>
-                        <Icon>home</Icon>
+                        <Icon>gamepad</Icon>
                     </ListItemIcon>
                     <ListItemText>Basic Controls</ListItemText>
                 </ListItem>
