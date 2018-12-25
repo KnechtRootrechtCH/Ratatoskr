@@ -3,7 +3,7 @@
 SetBatchLines, -1
 
 paths := {}
-paths["/"] := Func("Rotakoskr")
+paths["/"] := Func("Ratakoskr")
 paths["404"] := Func("NotFound")
 paths["/logo"] := Func("Logo")
 
@@ -33,8 +33,8 @@ NotFound(ByRef req, ByRef res) {
     res.status := 404
 }
 
-Rotakoskr(ByRef req, ByRef res) {
-    title := "Rotakoskr"
+Ratakoskr(ByRef req, ByRef res) {
+    title := "Ratakoskr"
     success:= false
     message:= null
     result:= null
@@ -72,5 +72,5 @@ Rotakoskr(ByRef req, ByRef res) {
 #include, %A_ScriptDir%\lib\AHKsock\AHKsock.ahk
 #include, %A_ScriptDir%\lib\AHKhttp\AHKhttp.ahk
 
-#include, %A_ScriptDir%\cmd\starcitizen\test.ahk
-#include, %A_ScriptDir%\cmd\starcitizen\flight.ahk
+#include, %A_ScriptDir%\cmd\test.ahk
+#include, %A_ScriptDir%\cmd\flight.ahk
