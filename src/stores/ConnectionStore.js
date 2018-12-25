@@ -15,6 +15,17 @@ class ConnectionStore {
     @computed get serverUri() {
         return 'http://' + this.address + ':' + this.port;
     }
+
+    @computed get missingSettingsCount() {
+        let count = 0;
+        if (!this.address) {
+            count++;
+        }
+        if (this.port <= 0) {
+            count++;
+        }
+        return count;
+    }
 }
 
 // ensure single instance
