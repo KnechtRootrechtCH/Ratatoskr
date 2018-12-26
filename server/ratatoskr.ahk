@@ -45,11 +45,11 @@ Ratakoskr(ByRef req, ByRef res) {
     if (commandFunction != 0) {
         result := commandFunction.Call()
         success := true
-
         message := "Command executed"
-        TrayTip %title%, %cmd%, 1, 17
     } else {
         message := "Command not found"
+        trayMessage := "Command not found: " . cmd
+        TrayTip %title%, %trayMessage%, 1, 18
     }
 
     if (success) {
@@ -65,6 +65,7 @@ Ratakoskr(ByRef req, ByRef res) {
     res.SetBodyText("{""command"": """ . command . """, ""message"": """ . message . """, ""result"":""" . result . """, ""success"": " . successString . "}")
     res.headers["Content-type"] := "application/json"
     res.headers["charset"] := "uft-8"
+    res.headers["Access-Control-Allow-Origin"] := "*"
     res.status := 200
 }
 
@@ -72,5 +73,5 @@ Ratakoskr(ByRef req, ByRef res) {
 #include, %A_ScriptDir%\lib\AHKsock\AHKsock.ahk
 #include, %A_ScriptDir%\lib\AHKhttp\AHKhttp.ahk
 
-#include, %A_ScriptDir%\cmd\test.ahk
 #include, %A_ScriptDir%\cmd\flight.ahk
+#include, %A_ScriptDir%\cmd\util.ahk

@@ -14,7 +14,7 @@ import Slide from '@material-ui/core/Slide';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-@inject('SettingsStore')
+@inject('RatatoskrStore')
 @observer
 class TitleBar extends Component {
     state = {
@@ -35,17 +35,17 @@ class TitleBar extends Component {
     };
 
     showMenubar = () => {
-        this.props.SettingsStore.showMenubar = true;
+        this.props.RatatoskrStore.showMenubar = true;
     };
 
     hideMenubar = () => {
-        this.props.SettingsStore.showMenubar = false;
+        this.props.RatatoskrStore.showMenubar = false;
     };
 
     render () {
         const { classes } = this.props;
-        const badgeContent = this.props.SettingsStore.settingAlerts;
-        const showMenuBar = this.props.SettingsStore.showMenubar || badgeContent > 0;
+        const badgeContent = this.props.RatatoskrStore.settingAlerts;
+        const showMenuBar = this.props.RatatoskrStore.showMenubar || badgeContent > 0;
         return (
             <div>
                 <Slide direction="down" in={showMenuBar} mountOnEnter unmountOnExit>

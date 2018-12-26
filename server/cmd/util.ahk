@@ -1,3 +1,6 @@
+TestConnection() {
+    return "ok"
+}
 TestWithReturnValue() {
     Send {n down}{n up}
     return "TestWithReturnValue_OK"

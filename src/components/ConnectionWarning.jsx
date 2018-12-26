@@ -10,7 +10,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 
 import SettingsIcon from '@material-ui/icons/Settings'
 
-@inject('SettingsStore')
+@inject('RatatoskrStore')
 @observer
 class ConnectionWarning extends Component {
     state = {
@@ -19,13 +19,17 @@ class ConnectionWarning extends Component {
 
     handleChange = (event, value) => {
         event.preventDefault();
-        this.props.SettingsStore.setTab(value);
+        this.props.RatatoskrStore.setTab(value);
     };
+
+    handleClick = (event) => {
+        this.props.RatatoskrStore.setTab('settings');
+    }
 
     render () {
         const classes = this.props.classes;
-        const connected = this.props.SettingsStore.connected;
-        const tab = this.props.SettingsStore.tab;
+        const connected = this.props.RatatoskrStore.connected;
+        const tab = this.props.RatatoskrStore.tab;
         const show = !connected && tab !== 'settings';
 
         return (
@@ -39,7 +43,7 @@ class ConnectionWarning extends Component {
                     <SnackbarContent
                         className={classes.content}
                         action={
-                            <Button className={classes.button} size="small">
+                            <Button className={classes.button} size="small" onClick={this.handleClick}>
                                 Please update connection settings&nbsp;
                                 <SettingsIcon/>
                             </Button>
@@ -55,10 +59,10 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     content: {
-        backgroundColor: theme.palette.error.dark,
+        backgroundColor: theme.palette.primary.dark,
     },
     button: {
-        color: theme.palette.text.primary,
+        color: theme.palette.common.black,
     }
 });
 
