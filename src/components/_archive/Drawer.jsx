@@ -19,13 +19,13 @@ class Drawer extends Component {
             <List>
                 <ListItem button>
                     <ListItemIcon>
-                        <Icon>gamepad</Icon>
+                        <Icon>dvr</Icon>
                     </ListItemIcon>
                     <ListItemText>Basic Controls</ListItemText>
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
-                        <Icon>memory</Icon>
+                        <Icon>blur_on</Icon>
                     </ListItemIcon>
                     <ListItemText>Flight Control Systems</ListItemText>
                 </ListItem>
@@ -43,7 +43,7 @@ class Drawer extends Component {
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
-                        <Icon>adjust</Icon>
+                        <Icon>flare</Icon>
                     </ListItemIcon>
                     <ListItemText>Targeting</ListItemText>
                 </ListItem>
