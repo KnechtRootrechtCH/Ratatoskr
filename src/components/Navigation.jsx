@@ -17,7 +17,7 @@ import ShieldsIcon from '@material-ui/icons/Security'
 import CommunicationsIcon from '@material-ui/icons/Headset'
 // import SettingsIcon from '@material-ui/icons/Settings'
 
-@inject('SettingsStore')
+@inject('RatatoskrStore')
 @observer
 class Navigation extends Component {
     state = {
@@ -26,23 +26,23 @@ class Navigation extends Component {
 
     handleChange = (event, value) => {
         event.preventDefault();
-        this.props.SettingsStore.setTab(value);
+        this.props.RatatoskrStore.setTab(value);
     };
 
     render () {
         const classes = this.props.classes;
-        const tab = this.props.SettingsStore.tab;
+        const tab = this.props.RatatoskrStore.tab;
         const showLabels = isWidthUp('sm', this.props.width);
 
         return (
-            <AppBar className={classes.bar} position="fixed" color="primary">
-                <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} scrollButtons="on" centered>
+            <AppBar className={classes.bar} position="fixed" color="default">
+                <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} indicatorColor="primary" centered>
                     <Tab
                         value="core"
                         label={ showLabels ? "Main" : null }
                         icon={<BasicsIcon/>}/>
                     <Tab
-                        value="flight"
+                        value="ifcs"
                         label={ showLabels ? "IFCS" : null }
                         icon={<IfcsIcon/>}/>
                     <Tab

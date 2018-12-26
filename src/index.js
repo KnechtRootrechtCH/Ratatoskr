@@ -5,10 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import {Provider} from 'mobx-react';
-import SettingsStore from './store/SettingsStore'
+import RatatoskrStore from './store/RatatoskrStore'
+import ThemeStore from './store/ThemeStore'
 
 const Root = (
-    <Provider SettingsStore={SettingsStore}>
+    <Provider RatatoskrStore={RatatoskrStore} ThemeStore={ThemeStore}>
         <App/>
     </Provider>
 );
