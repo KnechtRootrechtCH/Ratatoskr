@@ -27,7 +27,7 @@ class ThemeStore {
   }
 
   @action setTheme(theme) {
-    console.debug("ThemeStore.setTheme() : ", theme.palette);
+    console.debug("ThemeStore.setTheme() : ", theme);
     this.theme = theme;
   }
 }

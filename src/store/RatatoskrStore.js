@@ -1,35 +1,52 @@
 import {observable, action, computed} from 'mobx';
 import RatatoskrService from '../service/RatatoskrService';
+import LocalStorageService from '../service/LocalStorageService';
 
 class RatatoskrStore {
-    @observable tab = 'core'
-    @observable server = '192.168.1.122';
+    @observable tab = 'settings'
+    @observable server = '';
     @observable port = 4242;
     @observable connected = true;
+    @observable testingConnection = false;
+    @observable loadingSettings = false;
 
     constructor () {
-        this.loadSettings();
+        this.loadConnection();
         this.testConnection();
     }
 
     @action setTab = (tab) => {
+        console.debug("RatatoskrStore.setTab() :", tab);
         this.tab = tab;
     }
 
-    @action setServer= (address) => {
-        this.address = address;
+    @action setServer= (server) => {
+        console.debug("RatatoskrStore.setServer() =>", server)
+        this.server = server;
     }
 
     @action setPort = (port) => {
+        console.debug("RatatoskrStore.setPort() =>", port)
         this.port = port;
     }
 
-    @action loadSettings = () => {
-        //TODO: implement
+    @action loadConnection = () => {
+        const server = LocalStorageService.loadServer();
+        const port = LocalStorageService.loadPort();
+        console.debug("RatatoskrStore.loadConnection() =>", server, port)
+        if (server) {
+            this.server = server;
+        }
+        if (port) {
+            this.port = port;
+        }
     }
 
-    @action saveSettings = () => {
-        //TODO: implement
+    @action saveConnection = () => {
+        console.debug("RatatoskrStore.loadConnection() =>", this.server, this.port)
+        this.connected = false;
+        LocalStorageService.saveServer(this.server);
+        LocalStorageService.savePort(this.port);
     }
 
     @action testConnection = () => {
@@ -41,10 +58,13 @@ class RatatoskrStore {
             this.connected = false;
             return;
         }
+
+        this.testingConnection = true;
         RatatoskrService.testConnection(this.server, this.port)
             .then((result) => {
                 console.debug("RatatoskrStore.testConnection() =>", result.connected)
                 this.connected = result.connected;
+                this.testingConnection = false;
             });
     }
 

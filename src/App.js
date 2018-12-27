@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {inject, observer} from 'mobx-react';
 
-import Navigation from './components/Navigation';
-import PanelContainer from './components/PanelContainer';
 import ConnectionWarning from './components/ConnectionWarning';
+import MfdPanelContainer from './components/MfdPanelContainer';
+import Navigation from './components/Navigation';
+import Settings from './components/Settings';
+import SettingsFab from './components/SettingsFab';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
@@ -14,16 +16,17 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 class App extends Component {
   render() {
     const { classes } = this.props;
-    const materialTheme = this.props.ThemeStore.theme;
-    console.debug('App.render() :', materialTheme, classes);
+    const theme = this.props.ThemeStore.theme;
 
     return (
       <div className={classes.app}>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
-          <MuiThemeProvider theme={materialTheme}>
+          <MuiThemeProvider theme={theme}>
             <Navigation/>
-            <PanelContainer/>
+            <MfdPanelContainer/>
+            <Settings/>
+            <SettingsFab/>
             <ConnectionWarning/>
           </MuiThemeProvider>
       </div>
@@ -31,10 +34,10 @@ class App extends Component {
   }
 }
 
-const styles = theme => ({
+const styles = {
   app: {
   },
-});
+};
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,

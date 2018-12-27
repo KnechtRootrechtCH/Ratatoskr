@@ -9,7 +9,6 @@ import { withStyles } from '@material-ui/core/styles';
 class CorePanel extends Component {
     state = {};
 
-
     render () {
         return (
             <div>Core</div>

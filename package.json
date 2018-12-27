@@ -50,6 +50,8 @@
     "react-dev-utils": "^7.0.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
+    "react-swipeable-views": "^0.13.0",
+    "react-text-mask": "^5.4.3",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",

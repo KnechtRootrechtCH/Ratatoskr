@@ -9,20 +9,18 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+import CommunicationsIcon from '@material-ui/icons/Headset'
 import BasicsIcon from '@material-ui/icons/Dvr';
 import IfcsIcon from '@material-ui/icons/Flight'
 import PowerIcon from '@material-ui/icons/BatteryChargingFull'
 import ShieldsIcon from '@material-ui/icons/Security'
 // import TargetingIcon from '@material-ui/icons/Flare'
-import CommunicationsIcon from '@material-ui/icons/Headset'
+
 // import SettingsIcon from '@material-ui/icons/Settings'
 
 @inject('RatatoskrStore')
 @observer
 class Navigation extends Component {
-    state = {
-        tab: "core",
-    };
 
     handleChange = (event, value) => {
         event.preventDefault();
@@ -31,12 +29,16 @@ class Navigation extends Component {
 
     render () {
         const classes = this.props.classes;
-        const tab = this.props.RatatoskrStore.tab;
+        let tab = this.props.RatatoskrStore.tab;
         const showLabels = isWidthUp('sm', this.props.width);
+
+        if (tab === 'settings') {
+            tab = false;
+        }
 
         return (
             <AppBar className={classes.bar} position="fixed" color="default">
-                <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} indicatorColor="primary" centered>
+                <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} indicatorColor="primary" centered fullWidth>
                     <Tab
                         value="core"
                         label={ showLabels ? "Main" : null }
