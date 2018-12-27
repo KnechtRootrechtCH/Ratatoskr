@@ -38,6 +38,7 @@ const styles = theme => ({
         zIndex: 3,
         right: 15,
         bottom: 15,
+        cursor: 'pointer',
     },
     extendedIcon : {
         marginRight: theme.spacing.unit,

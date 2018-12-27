@@ -22,7 +22,6 @@ class MfdPanelContainer extends Component {
     handleChangeIndex = (value) => {
         this.props.RatatoskrStore.setTab(value);
         const index = this.state.tabs[value];
-        console.debug('MfdPanelContainer.handleChangeIndex() :', value, index);
         this.props.RatatoskrStore.setTab(index);
     }
 
@@ -35,8 +34,6 @@ class MfdPanelContainer extends Component {
         if (index < 0) {
             index = 0;
         }
-
-        console.debug('MfdPanelContainer.render() :', index, theme)
 
         return (
             ( show &&

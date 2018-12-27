@@ -69,7 +69,7 @@ class ConnectionSettings extends Component {
             helperText = 'Connection successfull';
         }
         return (
-            <div>
+            <div className={classes.settings}>
                 <div>
                     <Typography className={classes.header} variant="overline">Connection settings</Typography>
                     <TextField
@@ -121,6 +121,9 @@ class ConnectionSettings extends Component {
 }
 
 const styles = theme => ({
+    settings: {
+        width: 320,
+    },
     header : {
         color: theme.palette.primary.main,
     },
