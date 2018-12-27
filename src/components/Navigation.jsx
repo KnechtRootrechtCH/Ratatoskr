@@ -19,6 +19,7 @@ import ShieldsIcon from '@material-ui/icons/Security'
 // import SettingsIcon from '@material-ui/icons/Settings'
 
 @inject('RatatoskrStore')
+@inject('ThemeStore')
 @observer
 class Navigation extends Component {
 
@@ -29,6 +30,7 @@ class Navigation extends Component {
 
     render () {
         const classes = this.props.classes;
+        const themedNavbar = this.props.ThemeStore.themedNavbar;
         let tab = this.props.RatatoskrStore.tab;
         const showLabels = isWidthUp('sm', this.props.width);
 
@@ -37,7 +39,7 @@ class Navigation extends Component {
         }
 
         return (
-            <AppBar className={classes.bar} position="fixed" color="default">
+            <AppBar className={classes.bar} position="fixed" color={ themedNavbar ? "secondary" : "default" }>
                 <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} indicatorColor="primary" centered fullWidth>
                     <Tab
                         value="core"

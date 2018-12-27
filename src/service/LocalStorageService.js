@@ -3,17 +3,37 @@ class LocalStorageService {
     serverKey = 'ratatoskr.server';
     portKey = 'ratatoskr.port';
     tabKey = 'ratatoskr.tab';
+    themeTypeKey = 'ratatoskr.themeType';
+    ThemedNavbarKey = 'ratatoskr.ThemedNavbar';
+    primaryColorKey = 'ratatoskr.primaryColor';
+    secondaryColorKey = 'ratatoskr.secondaryColor';
 
     loadServer() {
-        return localStorage.getItem(this.serverKey)
+        return localStorage.getItem(this.serverKey);
     }
 
     loadPort() {
-        return localStorage.getItem(this.portKey)
+        return localStorage.getItem(this.portKey);
     }
 
     loadTab() {
-        return localStorage.getItem(this.tabKey)
+        return localStorage.getItem(this.tabKey);
+    }
+
+    loadThemeType() {
+        return localStorage.getItem(this.themeTypeKey);
+    }
+
+    loadThemedNavbar() {
+        return JSON.parse(localStorage.getItem(this.ThemedNavbarKey));
+    }
+
+    loadPrimaryColor() {
+        return JSON.parse(localStorage.getItem(this.primaryColorKey));
+    }
+
+    loadSecondaryColor() {
+        return JSON.parse(localStorage.getItem(this.secondaryColorKey));
     }
 
     saveServer(server) {
@@ -26,6 +46,22 @@ class LocalStorageService {
 
     saveTab(tab) {
         localStorage.setItem(this.tabKey, tab);
+    }
+
+    saveThemeType(type) {
+        localStorage.setItem(this.themeTypeKey, type);
+    }
+
+    saveThemedNavbar(enabled) {
+        return localStorage.setItem(this.ThemedNavbarKey, JSON.stringify(enabled));
+    }
+
+    savePrimaryColor(color) {
+        localStorage.setItem(this.primaryColorKey, JSON.stringify(color));
+    }
+
+    saveSecondaryColor(color) {
+        localStorage.setItem(this.secondaryColorKey, JSON.stringify(color));
     }
 }
 

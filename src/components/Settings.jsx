@@ -4,6 +4,7 @@ import {inject, observer} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 
 import ConnectionSettings from './settings/ConnectionSettings';
+import ThemeSettings from './settings/ThemeSettings';
 
 @inject('RatatoskrStore')
 @observer
@@ -19,6 +20,7 @@ class Settings extends Component {
             ( show &&
                 <div className={classes.settings}>
                     <ConnectionSettings/>
+                    <ThemeSettings/>
                 </div>
             )
         )

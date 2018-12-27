@@ -35,13 +35,6 @@ class ConnectionSettings extends Component {
         this.props.RatatoskrStore.testConnection();
     }
 
-    handleUndo = () => {
-        this.setState({
-            server: this.props.RatatoskrStore.server,
-            port: this.props.RatatoskrStore.port,
-        })
-    }
-
     handleServerChange = (event) => {
         this.setState({server: event.target.value});
     }
@@ -74,8 +67,8 @@ class ConnectionSettings extends Component {
 
         return (
             <div className={classes.settings}>
+                <Typography className={classes.header} variant="overline" color="primary">Connection settings</Typography>
                 <div>
-                    <Typography className={classes.header} variant="overline" color="primary">Connection settings</Typography>
                     <TextField
                         label="Server"
                         className={classes.serverTextField}
@@ -131,6 +124,7 @@ class ConnectionSettings extends Component {
 const styles = theme => ({
     settings: {
         width: 320,
+        marginBottom: 20,
     },
     header: {
     },
@@ -148,12 +142,8 @@ const styles = theme => ({
     },
     chip: {
         float: 'right',
-        argin: theme.spacing.unit,
+        margin: '5px 0 0 0',
     },
-    avatar: {
-
-    },
-    message: theme.typography.caption,
 });
 
 ConnectionSettings.propTypes = {
