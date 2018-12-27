@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import {inject, observer} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 
-import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import SaveIcon from '@material-ui/icons/Save';
 import OkIcon from '@material-ui/icons/CheckCircle';
 import TestingIcon from '@material-ui/icons/Autorenew';
+import WarningIcon from '@material-ui/icons/Error';
 
 @inject('RatatoskrStore')
 @observer
@@ -58,20 +59,23 @@ class ConnectionSettings extends Component {
         const changed = serverChanged || portChanged;
         const disabled = !changed || testingConnection;
 
-        let helperText = 'Connection failed!'
-        if (testingConnection) {
-            helperText = 'Testing connection...';
+        let message = 'Disconnected'
+        if (changed) {
+            message = 'Update'
         }
-        else if (changed) {
-            helperText = 'Save to test connection'
+        else if (testingConnection) {
+            message = 'Testing...';
         }
         else if (connected) {
-            helperText = 'Connection successfull';
+            message = 'Connected';
         }
+
+        const color = changed ? 'primary' : 'default';
+
         return (
             <div className={classes.settings}>
                 <div>
-                    <Typography className={classes.header} variant="overline">Connection settings</Typography>
+                    <Typography className={classes.header} variant="overline" color="primary">Connection settings</Typography>
                     <TextField
                         label="Server"
                         className={classes.serverTextField}
@@ -79,7 +83,6 @@ class ConnectionSettings extends Component {
                         variant="filled"
                         onChange={this.handleServerChange}
                         value={this.state.server}
-                        helperText={helperText}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
@@ -94,29 +97,34 @@ class ConnectionSettings extends Component {
                             shrink: true,
                         }}/>
                 </div>
-                <div>
-                    <span className={classes.buttons}>
-                        <Button
-                            className={classes.button}
-                            variant="outlined"
-                            color="primary"
+                <div className={classes.actions}>
+                        <Chip
+                            className={classes.chip}
+                            label={message}
+                            color={color}
+                            onClick={this.handleSave}
                             disabled={disabled}
-                            onClick={this.handleSave}>
-                                { (!connected || changed) && !testingConnection && (
-                                    <SaveIcon className={classes.iconSmall} />
-                                )}
-                                { connected && !testingConnection && !changed && (
-                                    <OkIcon className={classes.iconSmall} />
-                                )}
-                                { testingConnection && (
-                                    <TestingIcon className={classes.iconSmall} />
-                                )}
-                                Save
-                        </Button>
-                    </span>
+                            icon={this.renderIcon(testingConnection, connected, changed)}>
+                        </Chip>
                 </div>
             </div>
         )
+    }
+
+    renderIcon (testingConnection, connected, changed) {
+        if(changed) {
+            return (<SaveIcon />);
+        }
+
+        if (testingConnection) {
+            return (<TestingIcon/>)
+        }
+
+        if(connected) {
+            return (<OkIcon />);
+        }
+
+        return (<WarningIcon/>)
     }
 }
 
@@ -124,30 +132,28 @@ const styles = theme => ({
     settings: {
         width: 320,
     },
-    header : {
-        color: theme.palette.primary.main,
+    header: {
     },
-    button : {
+    actions: {
+        marginTop: 10,
+    },
+    serverTextField: {
         margin: 0,
-    },
-    buttons : {
-        float: 'right',
-    },
-    serverTextField : {
-        margin: '0 10px 0 0',
         width: 200,
     },
-    portTextField : {
-        margin: '0 0 0 10px',
+    portTextField: {
+        margin: 0,
         width: 100,
+        float: 'right',
     },
-    spacer : {
-        width: 20,
+    chip: {
+        float: 'right',
+        argin: theme.spacing.unit,
     },
-    iconSmall: {
-        marginRight: theme.spacing.unit,
-        fontSize: 20,
+    avatar: {
+
     },
+    message: theme.typography.caption,
 });
 
 ConnectionSettings.propTypes = {
