@@ -19,8 +19,10 @@ class Settings extends Component {
         return (
             ( show &&
                 <div className={classes.settings}>
+                    <div className={classes.spacer}/>
                     <ConnectionSettings/>
                     <ThemeSettings/>
+                    <div className={classes.spacer}/>
                 </div>
             )
         )
@@ -37,6 +39,10 @@ const styles = theme => ({
         alignItems: 'center', // horizontal center
         justifyContent: 'center', // vertical center
     },
+    spacer: {
+        backgroundColor: theme.palette.background.default,
+        height: 80,
+    }
 });
 
 Settings.propTypes = {
