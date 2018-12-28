@@ -49,6 +49,7 @@
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.0",
     "react-dom": "^16.7.0",
+    "react-meta-tags": "^0.7.3",
     "react-router-dom": "^4.3.1",
     "react-swipeable-views": "^0.13.0",
     "react-text-mask": "^5.4.3",

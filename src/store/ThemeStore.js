@@ -8,7 +8,6 @@ import {indigo, blue, lightBlue, cyan} from '@material-ui/core/colors';
 import {teal, green, lightGreen, lime} from '@material-ui/core/colors';
 import {yellow, amber, orange, deepOrange} from '@material-ui/core/colors';
 import {grey, blueGrey} from '@material-ui/core/colors';
-//import indigo from'@material-ui/core/colors/indigo';
 
 class ThemeStore {
   @observable colors = [
@@ -79,6 +78,12 @@ class ThemeStore {
     const theme = createMuiTheme({
       typography: {
         useNextVariants: true,
+        subtitle1: {
+          textTransform: 'uppercase',
+        },
+        caption: {
+          textTransform: 'uppercase',
+        },
       },
       palette: {
         type: this.type,

@@ -41,7 +41,7 @@ const styles = theme => ({
     },
     spacer: {
         backgroundColor: theme.palette.background.default,
-        height: 80,
+        height: 90,
     }
 });
 

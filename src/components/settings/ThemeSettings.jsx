@@ -50,11 +50,11 @@ class ThemeSettings extends Component {
 
         return (
             <div className={classes.settings}>
-                <Typography className={classes.header} variant="overline" color="primary">Theme settings</Typography>
+                <Typography className={classes.header} variant="subtitle1" color="primary">Theme settings</Typography>
                 <Grid container className={classes.paletteColumn} item xs={12} spacing={0}>
                     <FormControlLabel
                         className={classes.switch}
-                        labelPlacement="start"
+                        labelPlacement="end"
                         control={
                             <Switch
                             checked={darkTheme}
@@ -62,13 +62,13 @@ class ThemeSettings extends Component {
                             color="primary"/>
                         }
                         label={
-                            <Typography className={classes.header} variant="overline">Dark mode</Typography>
+                            <Typography variant="caption">Dark mode</Typography>
                         }/>
                     </Grid>
                     <Grid container className={classes.paletteColumn} item xs={12} spacing={0}>
                     <FormControlLabel
                         className={classes.switch}
-                        labelPlacement="start"
+                        labelPlacement="end"
                         control={
                             <Switch
                             checked={themedNavbar}
@@ -76,16 +76,16 @@ class ThemeSettings extends Component {
                             color="primary"/>
                         }
                         label={
-                            <Typography className={classes.header} variant="overline">Color navbar</Typography>
+                            <Typography variant="caption">Colored navigation bar</Typography>
                         }/>
                     </Grid>
                 <Grid container className={classes.palette} spacing={16}>
                     <Grid container className={classes.paletteColumn} item xs={6} spacing={0}>
-                        <Typography className={classes.header} variant="overline">Primary color</Typography>
+                        <Typography className={classes.header} variant="caption">Primary color</Typography>
                         {this.renderColorGrid('primary')}
                     </Grid>
                     <Grid container className={classes.paletteColumn} item xs={6} spacing={0}>
-                        <Typography className={classes.header} variant="overline">Secondary color</Typography>
+                        <Typography className={classes.header} variant="caption">Secondary color</Typography>
                         {this.renderColorGrid('secondary')}
                     </Grid>
                 </Grid>
@@ -131,7 +131,7 @@ class ThemeSettings extends Component {
 
         return (
             <Grid
-                className={ selected ? classes.paletteItemSelected : classes.paletteItem}
+                className={ classes.paletteItem + (selected ? " selected" : "")}
                 onClick={(e) => this.handleColorSelection(type, color)}
                 item
                 xs={3}
@@ -146,6 +146,9 @@ const styles = theme => ({
         width: 320,
         marginBottom: 20,
     },
+    header: {
+        margin: '10px 0 5px 0',
+    },
     palette: {
 
     },
@@ -157,13 +160,15 @@ const styles = theme => ({
     },
     paletteItem: {
         cursor: 'pointer',
-    },
-    paletteItemSelected: {
-        border: '2px solid',
-        borderColor: theme.palette.text.primary,
+        width: 38,
+        height: 38,
+        '&.selected': {
+            border: '2px solid',
+            borderColor: theme.palette.text.primary,
+        },
     },
     switch: {
-        margin: 0,
+        margin: '0 0 0 -14px',
     },
 });
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {inject, observer} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 
+import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -67,7 +68,7 @@ class ConnectionSettings extends Component {
 
         return (
             <div className={classes.settings}>
-                <Typography className={classes.header} variant="overline" color="primary">Connection settings</Typography>
+                <Typography className={classes.header} variant="subtitle1" color="primary">Connection settings</Typography>
                 <div>
                     <TextField
                         label="Server"
@@ -91,33 +92,36 @@ class ConnectionSettings extends Component {
                         }}/>
                 </div>
                 <div className={classes.actions}>
-                        <Chip
-                            className={classes.chip}
-                            label={message}
+                        <Button
+                            className={classes.button}
                             color={color}
+                            variant="outlined"
                             onClick={this.handleSave}
-                            disabled={disabled}
-                            icon={this.renderIcon(testingConnection, connected, changed)}>
-                        </Chip>
+                            disabled={disabled}>
+                            {this.renderIcon(testingConnection, connected, changed)}
+                            {message}
+                        </Button>
                 </div>
             </div>
         )
     }
 
     renderIcon (testingConnection, connected, changed) {
+        const { classes } = this.props;
+
         if(changed) {
-            return (<SaveIcon />);
+            return (<SaveIcon className={classes.icon}/>);
         }
 
         if (testingConnection) {
-            return (<TestingIcon/>)
+            return (<TestingIcon className={classes.icon}/>)
         }
 
         if(connected) {
-            return (<OkIcon />);
+            return (<OkIcon  className={classes.icon}/>);
         }
 
-        return (<WarningIcon/>)
+        return (<WarningIcon className={classes.icon}/>)
     }
 }
 
@@ -140,10 +144,13 @@ const styles = theme => ({
         width: 100,
         float: 'right',
     },
-    chip: {
+    button: {
         float: 'right',
         margin: '5px 0 0 0',
     },
+    icon: {
+        marginRight: theme.spacing.unit,
+    }
 });
 
 ConnectionSettings.propTypes = {
