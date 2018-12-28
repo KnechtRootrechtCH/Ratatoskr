@@ -4,14 +4,14 @@ import {inject, observer} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
 import SaveIcon from '@material-ui/icons/Save';
 import OkIcon from '@material-ui/icons/CheckCircle';
 import TestingIcon from '@material-ui/icons/Autorenew';
-import WarningIcon from '@material-ui/icons/Error';
+import WarningIcon from '@material-ui/icons/Warning';
 
 @inject('RatatoskrStore')
 @observer
@@ -51,67 +51,71 @@ class ConnectionSettings extends Component {
         const serverChanged = this.state.server !== this.props.RatatoskrStore.server;
         const portChanged = this.state.port !== this.props.RatatoskrStore.port;
         const changed = serverChanged || portChanged;
-        const disabled = !changed || testingConnection;
+        const disabled = testingConnection;
+        const error = !connected && !testingConnection;
 
-        let message = 'Disconnected'
-        if (changed) {
-            message = 'Update'
+        let helperText = '';
+        if (testingConnection) {
+            helperText = 'Testing connection...';
+        } else if (changed) {
+            helperText = 'Update to test connection';
+        } else if (connected) {
+            helperText = 'Connection successful';
+        } else {
+            helperText = 'Connection failed';
         }
-        else if (testingConnection) {
-            message = 'Testing...';
-        }
-        else if (connected) {
-            message = 'Connected';
-        }
-
-        const color = changed ? 'primary' : 'default';
 
         return (
             <div className={classes.settings}>
-                <Typography className={classes.header} variant="subtitle1" color="primary">Connection settings</Typography>
-                <div>
-                    <TextField
+                <Grid container spacing={8}>
+                    <Grid item xs={12}>
+                        <Typography className={classes.header} variant="subtitle1" color="primary">Connection settings</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
                         label="Server"
-                        className={classes.serverTextField}
+                        className={classes.textField}
                         placeholder="0.0.0.0"
                         variant="filled"
+                        error={error}
                         onChange={this.handleServerChange}
                         value={this.state.server}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
-                    <TextField
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
                         label="Port"
-                        className={classes.portTextField}
+                        className={classes.textField}
                         placeholder="123"
                         variant="filled"
+                        error={error}
+                        helperText={helperText}
                         value={this.state.port}
                         onChange={this.handlePortChange}
                         InputLabelProps={{
                             shrink: true,
                         }}/>
-                </div>
-                <div className={classes.actions}>
+                    </Grid>
+                    <Grid item xs={12}>
                         <Button
                             className={classes.button}
-                            color={color}
+                            color="primary"
                             variant="outlined"
                             onClick={this.handleSave}
                             disabled={disabled}>
-                            {this.renderIcon(testingConnection, connected, changed)}
-                            {message}
+                                <SaveIcon className={classes.icon}/>
+                                Update
                         </Button>
-                </div>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
 
-    renderIcon (testingConnection, connected, changed) {
+    renderIcon (testingConnection, connected) {
         const { classes } = this.props;
-
-        if(changed) {
-            return (<SaveIcon className={classes.icon}/>);
-        }
 
         if (testingConnection) {
             return (<TestingIcon className={classes.icon}/>)
@@ -128,25 +132,15 @@ class ConnectionSettings extends Component {
 const styles = theme => ({
     settings: {
         width: 320,
-        marginBottom: 20,
+        marginBottom: 10,
     },
     header: {
     },
-    actions: {
-        marginTop: 10,
-    },
-    serverTextField: {
-        margin: 0,
-        width: 200,
-    },
-    portTextField: {
-        margin: 0,
-        width: 100,
-        float: 'right',
+    textField : {
+        width: '100%',
     },
     button: {
         float: 'right',
-        margin: '5px 0 0 0',
     },
     icon: {
         marginRight: theme.spacing.unit,
