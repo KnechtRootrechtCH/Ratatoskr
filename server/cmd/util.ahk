@@ -1,4 +1,7 @@
 TestConnection() {
+    title := "Rotakoskr"
+    message := "Connection established"
+    TrayTip %title%, %message%, 1, 17
     return "ok"
 }
 TestWithReturnValue() {
@@ -6,5 +9,7 @@ TestWithReturnValue() {
     return "TestWithReturnValue_OK"
 }
 Test() {
-    Send n
+    title := "Rotakoskr"
+    message := "Test command executed"
+    TrayTip %title%, %message%, 1, 17
 }

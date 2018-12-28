@@ -42,8 +42,8 @@ Ratakoskr(ByRef req, ByRef res) {
     command := req.queries["cmd"]
     function := Func(command)
 
-    if (commandFunction != 0) {
-        result := commandFunction.Call()
+    if (function != 0) {
+        result := function.Call()
         success := true
         message := "Command executed"
     } else {
@@ -69,7 +69,9 @@ Ratakoskr(ByRef req, ByRef res) {
     res.status := 200
 }
 
+/*
 #include, %A_ScriptDir%\lib\Class_Console\Class_Console.ahk
+*/
 #include, %A_ScriptDir%\lib\AHKsock\AHKsock.ahk
 #include, %A_ScriptDir%\lib\AHKhttp\AHKhttp.ahk
 
