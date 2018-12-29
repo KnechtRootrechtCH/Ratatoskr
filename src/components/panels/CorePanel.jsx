@@ -25,7 +25,7 @@ class CorePanel extends Component {
                         label='Power'
                         icon='power_settings_new'
                         variant='text'
-                        color='primary'
+                        color='default'
                         labelColor='default'
                         iconColor='inherit'/>
 
@@ -33,8 +33,8 @@ class CorePanel extends Component {
                         command='Power_Engines'
                         label='Engines'
                         icon='blur_circular'
-                        variant='outlined'
-                        color='primary'
+                        variant='text'
+                        color='default'
                         labelColor='default'
                         iconColor='inherit'/>
 
@@ -42,11 +42,27 @@ class CorePanel extends Component {
                 <div className={classes.controlRow}>
                     <Control
                             command='Test'
-                            label='Testing testing testing'
-                            icon='check_circle_outline'
-                            variant='outlined'
+                            size={1}
+                            label='Testing'
+                            variant='contained'
                             color='primary'
-                            labelColor='default'
+                            labelColor='inherit'
+                            iconColor='inherit'/>
+                    <Control
+                            command='Test'
+                            size={2}
+                            label='Testing testing testing'
+                            variant='outlined'
+                            color='secondary'
+                            labelColor='inherit'
+                            iconColor='inherit'/>
+                    <Control
+                            command='Test'
+                            size={1}
+                            label='Testing'
+                            variant='contained'
+                            color='primary'
+                            labelColor='inherit'
                             iconColor='inherit'/>
                 </div>
 

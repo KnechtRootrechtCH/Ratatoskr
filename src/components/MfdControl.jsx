@@ -77,11 +77,13 @@ class MfdControl extends Component {
             className={classes.control}>
                 { command && (
                 <div>
+                    { iconName &&
                     <Icon
                         style={{ fontSize: iconSize }}
                         color={iconColor}>
                         {iconName}
                     </Icon>
+                     }
                     <Typography className={classes.label} variant="button" color={labelColor}>{label}</Typography>
                 </div>
                 )}
