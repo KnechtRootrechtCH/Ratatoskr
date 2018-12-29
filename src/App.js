@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { hot } from 'react-hot-loader'
 import { withStyles } from '@material-ui/core/styles';
 import {inject, observer} from 'mobx-react';
 import MetaTags from 'react-meta-tags';
@@ -55,4 +56,4 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(hot(module)(App));
