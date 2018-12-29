@@ -28,7 +28,7 @@ class MfdPanel extends Component {
                     <div className={classes.spacer}/>
                 }
                 { title &&
-                    <Typography className={classes.header} variant="h6" color="inherit">Connection settings</Typography>
+                    <Typography className={classes.header} variant="h6" color="inherit">{title}</Typography>
                 }
                 {children}
                 { bottomNavbar &&
@@ -42,6 +42,7 @@ class MfdPanel extends Component {
 const styles = theme => ({
     header: {
         margin: 5,
+        textTransform: 'uppercase',
     },
     panel: {
         backgroundColor: theme.palette.background.default,

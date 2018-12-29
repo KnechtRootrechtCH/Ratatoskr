@@ -22,7 +22,7 @@ class About extends Component {
                         <Typography className={classes.header} variant="subtitle1" color="primary">About</Typography>
                      </Grid>
                      <Grid item xs={12}>
-                        <Typography className={classes.header} variant="body" color="default">
+                        <Typography className={classes.header} variant="body1" color="textSecondary">
                         Fo shizzle rizzle dolor. Shut the shizzle up magna crunk, dignissim sure amizzle, bling bling sizzle, shizzlin dizzle nizzle, break it down. Maecenizzle izzle break it down. Sizzle malesuada shiznit yo risus. Suspendisse shizzlin dizzle. Crizzle aliquet ass turpizzle. Suspendisse my shizz i'm in the shizzle fo shizzle my nizzle. Sizzle doggy boom shackalack, interdizzle, posuere izzle, dapibus et, dang. Shiz check out this dang. Pimpin' shiz lectus sizzle pot dolizzle. Phat tellivizzle felizzle izzle nizzle. Lorizzle ipsum dolizzle amizzle, bow wow wow adipiscing elit. Suspendisse massa purizzle, go to hizzle yo, ullamcorper id, gangsta mammasay mammasa mamma oo sa, fo shizzle. Nizzle porta rutrum nunc.
                         </Typography>
                      </Grid>
