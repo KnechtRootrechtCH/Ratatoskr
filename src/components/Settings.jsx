@@ -40,7 +40,6 @@ const styles = theme => ({
         justifyContent: 'center', // vertical center
     },
     spacer: {
-        backgroundColor: theme.palette.background.default,
         height: 90,
     }
 });

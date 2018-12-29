@@ -48,7 +48,7 @@ Ratakoskr(ByRef req, ByRef res) {
         message := "Command executed"
     } else {
         message := "Command not found"
-        trayMessage := "Command not found: " . cmd
+        trayMessage := "Command not found: " . command
         TrayTip %title%, %trayMessage%, 1, 18
     }
 
