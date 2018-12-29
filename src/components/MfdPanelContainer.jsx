@@ -42,11 +42,11 @@ class MfdPanelContainer extends Component {
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={index}
                     onChangeIndex={this.handleChangeIndex}>
-                    <MfdPanel><CorePanel/></MfdPanel>
-                    <MfdPanel><IfcsPanel/></MfdPanel>
-                    <MfdPanel><SettingsPanel/></MfdPanel>
-                    <MfdPanel><SettingsPanel/></MfdPanel>
-                    <MfdPanel><SettingsPanel/></MfdPanel>
+                    <MfdPanel title='Main Systems'><CorePanel/></MfdPanel>
+                    <MfdPanel title='I.F.C.S.'><IfcsPanel/></MfdPanel>
+                    <MfdPanel title='Power Management'><SettingsPanel/></MfdPanel>
+                    <MfdPanel title='Shield Management'><SettingsPanel/></MfdPanel>
+                    <MfdPanel title='Communications'><SettingsPanel/></MfdPanel>
                 </SwipeableViews>
             )
         )

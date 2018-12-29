@@ -5,8 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Control from '../MfdControl'
 
-import Grid from '@material-ui/core/Grid';
-
 @inject('RatatoskrStore')
 @observer
 class CorePanel extends Component {

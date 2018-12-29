@@ -30,16 +30,21 @@ class Navigation extends Component {
 
     render () {
         const classes = this.props.classes;
-        const themedNavbar = this.props.ThemeStore.themedNavbar;
-        let tab = this.props.RatatoskrStore.tab;
-        const showLabels = isWidthUp('sm', this.props.width);
 
+        const showLabels = isWidthUp('sm', this.props.width);
+        let tab = this.props.RatatoskrStore.tab;
         if (tab === 'settings') {
             tab = false;
         }
 
+        const themedNavbar = this.props.ThemeStore.themedNavbar;
+        const bottomNavbar = this.props.ThemeStore.bottomNavbar;
+        const barClass = bottomNavbar ? classes.barBottom : classes.barTop;
+        const show  = !this.props.ThemeStore.hideNavbar;
+
         return (
-            <AppBar className={classes.bar} position="fixed" color={ themedNavbar ? "secondary" : "default" }>
+            ( show &&
+            <AppBar className={barClass} position="fixed" color={ themedNavbar ? "secondary" : "default" }>
                 <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} indicatorColor="primary" centered fullWidth>
                     <Tab
                         value="core"
@@ -63,14 +68,24 @@ class Navigation extends Component {
                         icon={<CommunicationsIcon/>}/>
                 </Tabs>
             </AppBar>
+            )
         );
      }
 }
 
 const styles = {
-    bar: {
+    barTop: {
         flexGrow: 1,
         width: '100%',
+    },
+    barBottom: {
+        flexGrow: 1,
+        width: '100%',
+        top: 'auto',
+        bottom: 0,
+    },
+    barLeft: {
+
     },
     tabs: {
     }

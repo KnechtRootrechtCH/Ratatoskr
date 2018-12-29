@@ -4,40 +4,64 @@ import {inject, observer} from 'mobx-react';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import ExitIcon from '@material-ui/icons/CheckCircle'
 import SettingsIcon from '@material-ui/icons/Settings'
 
 @inject('RatatoskrStore')
+@inject('ThemeStore')
 @observer
 class SettingsFab extends Component {
     state = {
     };
 
-    handleClick = () => {
+    handleSettingsClick = () => {
         this.props.RatatoskrStore.setTab('settings');
+    }
+
+    handleSaveClick = () => {
+        this.props.RatatoskrStore.setTab('core');
     }
 
     render () {
         const { classes } = this.props;
         const connected = this.props.RatatoskrStore.connected;
         const tab = this.props.RatatoskrStore.tab;
-        const show = connected && tab !== 'settings';
+        const settingsActive = connected && tab === 'settings';
+        const positionTop = this.props.ThemeStore.bottomNavbar;
+        const noNavbar = this.props.ThemeStore.hideNavbar;
+        const iconClasses = positionTop || noNavbar ? classes.iconTop : classes.iconBottom;
 
         return (
-            ( show &&
-                <SettingsIcon className={classes.settingsIcon} onClick={this.handleClick}/>
-            )
+            (settingsActive ? (
+                <ExitIcon className={iconClasses} onClick={this.handleSaveClick} color='primary'/>
+            ):(
+                <SettingsIcon className={iconClasses} onClick={this.handleSettingsClick} color='primary'/>
+            ))
         )
     }
 }
 
 const styles = theme => ({
-    settingsIcon : {
+    iconTop : {
         margin: theme.spacing.unit,
         color: theme.palette.primary.main,
-        position: 'absolute',
+        position: 'fixed',
         zIndex: 3,
-        right: 15,
-        bottom: 15,
+        right: 5,
+        top: 5,
+        width: 30,
+        height: 30,
+        cursor: 'pointer',
+    },
+    iconBottom : {
+        margin: theme.spacing.unit,
+        color: theme.palette.primary.main,
+        position: 'fixed',
+        zIndex: 3,
+        right: 5,
+        bottom: 5,
+        width: 30,
+        height: 30,
         cursor: 'pointer',
     },
     extendedIcon : {

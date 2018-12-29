@@ -38,14 +38,26 @@ class ThemeSettings extends Component {
         this.props.ThemeStore.applyTheme();
     }
 
-    handleNavbarSwitch = () => {
-        const enabled = this.props.ThemeStore.themedNavbar;
-        this.props.ThemeStore.setThemedNavbar(!enabled);
+    handleNavbarHide = () => {
+        const value = this.props.ThemeStore.hideNavbar;
+        this.props.ThemeStore.setHideNavbar(!value);
+    }
+
+    handleNavbarPosition = () => {
+        const value = this.props.ThemeStore.bottomNavbar;
+        this.props.ThemeStore.setBottomNavbar(!value);
+    }
+
+    handleNavbarColor = () => {
+        const value = this.props.ThemeStore.themedNavbar;
+        this.props.ThemeStore.setThemedNavbar(!value);
     }
 
     render () {
         const { classes } = this.props;
         const darkTheme = this.props.ThemeStore.type === 'dark';
+        const hideNavbar = this.props.ThemeStore.hideNavbar;
+        const bottomdNavbar = this.props.ThemeStore.bottomNavbar;
         const themedNavbar = this.props.ThemeStore.themedNavbar;
 
         return (
@@ -53,6 +65,18 @@ class ThemeSettings extends Component {
                 <Grid container className={classes.palette} spacing={8}>
                     <Grid item xs={12}>
                         <Typography className={classes.header} variant="subtitle1" color="primary">Theme settings</Typography>
+                    </Grid>
+                    <Grid container className={classes.paletteColumn} item xs={6}>
+                        <Typography className={classes.header} variant="caption">Primary color</Typography>
+                    </Grid>
+                    <Grid container className={classes.paletteColumn} item xs={6}>
+                        <Typography className={classes.header} variant="caption">Secondary color</Typography>
+                    </Grid>
+                    <Grid container className={classes.paletteColumn} item xs={6} spacing={0}>
+                        {this.renderColorGrid('primary')}
+                    </Grid>
+                    <Grid container className={classes.paletteColumn} item xs={6} spacing={0}>
+                        {this.renderColorGrid('secondary')}
                     </Grid>
                     <Grid item xs={12}>
                         <FormControlLabel
@@ -74,25 +98,43 @@ class ThemeSettings extends Component {
                                 labelPlacement="end"
                                 control={
                                     <Switch
-                                    checked={themedNavbar}
-                                    onChange={this.handleNavbarSwitch}
+                                    checked={hideNavbar}
+                                    onChange={this.handleNavbarHide}
                                     color="primary"/>
                                 }
                                 label={
-                                    <Typography variant="caption">Colored navigation bar</Typography>
+                                    <Typography variant="caption">Hide navigation bar</Typography>
                                 }/>
                     </Grid>
-                    <Grid container className={classes.paletteColumn} item xs={6}>
-                        <Typography className={classes.header} variant="caption">Primary color</Typography>
+                    <Grid item xs={12}>
+                            <FormControlLabel
+                                className={classes.switch}
+                                labelPlacement="end"
+                                disabled={hideNavbar}
+                                control={
+                                    <Switch
+                                    checked={bottomdNavbar}
+                                    onChange={this.handleNavbarPosition}
+                                    color="primary"/>
+                                }
+                                label={
+                                    <Typography variant="caption">Bottom navigation bar</Typography>
+                                }/>
                     </Grid>
-                    <Grid container className={classes.paletteColumn} item xs={6}>
-                        <Typography className={classes.header} variant="caption">Secondary color</Typography>
-                    </Grid>
-                    <Grid container className={classes.paletteColumn} item xs={6} spacing={0}>
-                        {this.renderColorGrid('primary')}
-                    </Grid>
-                    <Grid container className={classes.paletteColumn} item xs={6} spacing={0}>
-                        {this.renderColorGrid('secondary')}
+                    <Grid item xs={12}>
+                            <FormControlLabel
+                                className={classes.switch}
+                                labelPlacement="end"
+                                disabled={hideNavbar}
+                                control={
+                                    <Switch
+                                    checked={themedNavbar}
+                                    onChange={this.handleNavbarColor}
+                                    color="primary"/>
+                                }
+                                label={
+                                    <Typography variant="caption" >Colored navigation bar</Typography>
+                                }/>
                     </Grid>
                 </Grid>
             </div>
@@ -157,7 +199,6 @@ const styles = theme => ({
     },
     paletteGrid: {
         width: 140,
-        height: 140,
     },
     paletteColumn: {
     },

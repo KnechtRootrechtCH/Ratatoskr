@@ -23,6 +23,8 @@ class ThemeStore {
   @observable secondary = {};
   @observable type = '';
   @observable themedNavbar = false;
+  @observable bottomNavbar = true;
+  @observable hideNavbar = false;
 
   @observable defaultPrimary = amber;
   @observable defaultSecondary = indigo;
@@ -37,6 +39,8 @@ class ThemeStore {
     }
 
     this.themedNavbar = LocalStorageService.loadThemedNavbar();
+    this.bottomNavbar = LocalStorageService.loadBottomNavbar();
+    this.hideNavbar = LocalStorageService.loadHideNavbar();
 
     const primary = LocalStorageService.loadPrimaryColor();
     if (primary && primary['500']) {
@@ -61,9 +65,19 @@ class ThemeStore {
     this.type = type;
   }
 
-  @action setThemedNavbar(enabled) {
-    this.themedNavbar = enabled;
+  @action setThemedNavbar(value) {
+    this.themedNavbar = value;
     LocalStorageService.saveThemedNavbar(this.themedNavbar);
+  }
+
+  @action setBottomNavbar(value) {
+    this.bottomNavbar = value;
+    LocalStorageService.saveBottomNavbar(this.bottomNavbar);
+  }
+
+  @action setHideNavbar(value) {
+    this.hideNavbar = value;
+    LocalStorageService.saveHideNavbar(this.hideNavbar);
   }
 
   @action setPrimary(color) {

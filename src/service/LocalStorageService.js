@@ -7,6 +7,8 @@ class LocalStorageService {
     ThemedNavbarKey = 'ratatoskr.ThemedNavbar';
     primaryColorKey = 'ratatoskr.primaryColor';
     secondaryColorKey = 'ratatoskr.secondaryColor';
+    bottomNavbarKey = 'ratatoskr.bottomNavbar';
+    hideNavbarKey = 'ratatoskr.hideNavbar';
 
     loadServer() {
         return localStorage.getItem(this.serverKey);
@@ -36,32 +38,48 @@ class LocalStorageService {
         return JSON.parse(localStorage.getItem(this.secondaryColorKey));
     }
 
-    saveServer(server) {
-        localStorage.setItem(this.serverKey, server);
+    loadBottomNavbar() {
+        return JSON.parse(localStorage.getItem(this.bottomNavbarKey));
     }
 
-    savePort(port) {
-        localStorage.setItem(this.portKey, port);
+    loadHideNavbar() {
+        return JSON.parse(localStorage.getItem(this.hideNavbarKey));
     }
 
-    saveTab(tab) {
-        localStorage.setItem(this.tabKey, tab);
+    saveServer(value) {
+        localStorage.setItem(this.serverKey, value);
     }
 
-    saveThemeType(type) {
-        localStorage.setItem(this.themeTypeKey, type);
+    savePort(value) {
+        localStorage.setItem(this.portKey, value);
     }
 
-    saveThemedNavbar(enabled) {
-        return localStorage.setItem(this.ThemedNavbarKey, JSON.stringify(enabled));
+    saveTab(value) {
+        localStorage.setItem(this.tabKey, value);
     }
 
-    savePrimaryColor(color) {
-        localStorage.setItem(this.primaryColorKey, JSON.stringify(color));
+    saveThemeType(value) {
+        localStorage.setItem(this.themeTypeKey, value);
     }
 
-    saveSecondaryColor(color) {
-        localStorage.setItem(this.secondaryColorKey, JSON.stringify(color));
+    saveThemedNavbar(value) {
+        return localStorage.setItem(this.ThemedNavbarKey, JSON.stringify(value));
+    }
+
+    savePrimaryColor(value) {
+        localStorage.setItem(this.primaryColorKey, JSON.stringify(value));
+    }
+
+    saveSecondaryColor(value) {
+        localStorage.setItem(this.secondaryColorKey, JSON.stringify(value));
+    }
+
+    saveBottomNavbar(value) {
+        localStorage.setItem(this.bottomNavbarKey, JSON.stringify(value));
+    }
+
+    saveHideNavbar(value) {
+        localStorage.setItem(this.hideNavbarKey, JSON.stringify(value));
     }
 }
 
