@@ -149,23 +149,16 @@ class ThemeSettings extends Component {
             return (<div></div>);
         }
 
-        /*
-        colors.forEach((color) => {
-            color.key = color['500']
-        });
-        console.debug('ThemeSettings.renderColorGrid() : ', type, colors);
-        */
-
         return (
             <Grid className={classes.paletteGrid} container item xs={12}>
-            {colors.map(color => {
-                return this.renderColorItem(type, color)
+            {colors.map((color, index) => {
+                return this.renderColorItem(type, color, index)
             })}
             </Grid>
         );
     }
 
-    renderColorItem (type, color) {
+    renderColorItem (type, color, index) {
         const { classes } = this.props;
 
         const style = {
@@ -176,9 +169,11 @@ class ThemeSettings extends Component {
             this.props.ThemeStore.primary :
             this.props.ThemeStore.secondary;
         const selected = current['500'] === color['500'];
+        const key = type + index;
 
         return (
             <Grid
+                key={key}
                 className={ classes.paletteItem + (selected ? " selected" : "")}
                 onClick={(e) => this.handleColorSelection(type, color)}
                 item

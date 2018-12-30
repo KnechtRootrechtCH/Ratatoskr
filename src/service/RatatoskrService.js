@@ -15,12 +15,12 @@ class RatatoskrService {
             console.debug('RatatoskrService.executeCommand() : ', server, port, command)
             axios.get(`http://${server}:${port}/?cmd=${command}`)
                 .then(result => {
-                    console.debug('RatatoskrService.executeCommand() =>', result.data)
+                    console.debug('RatatoskrService.executeCommand() : response =>', result.data)
                     result.data.connected = true;
                     resolve(result.data);
                 })
                 .catch(reason => {
-                    console.debug('RatatoskrService.executeCommand() : failed =>', reason)
+                    console.debug('RatatoskrService.executeCommand() : error =>', reason)
                     resolve({
                         "command": command,
                         "message": reason.message,

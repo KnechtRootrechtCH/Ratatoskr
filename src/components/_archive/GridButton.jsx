@@ -6,12 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 import withWidth from '@material-ui/core/withWidth';
 
 import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import { Typography } from '@material-ui/core';
 
 @inject('RatatoskrStore')
 @observer
-class MfdControl extends Component {
+class GridButton extends Component {
     state = {
     };
 
@@ -27,32 +28,36 @@ class MfdControl extends Component {
         super(props);
         this.state = {
             command: props.command,
+            tab: props.tab,
             pressed: false,
         }
     }
 
     setPressed(pressed) {
-
         this.setState({
             pressed: pressed,
         })
     }
 
     handleClick = () => {
-        if (!this.state.command) {
+        console.debug('handle click');
+        if (this.state.command) {
+            this.props.RatatoskrStore.executeCommand(this.state.command);
+        } else if (this.state.tab) {
+            console.debug('tab', this.state.tab);
+            this.props.RatatoskrStore.setTab(this.state.tab);
+        } else {
+            console.debug('no command');
             return;
         }
         this.setPressed(true);
         setTimeout(() => {
             this.setPressed(false)
         }, 350);
-
-        this.props.RatatoskrStore.executeCommand(this.props.command);
     }
 
     render () {
         const { classes } = this.props;
-        const command = this.props.command;
         const label = this.props.label ? this.props.label : this.props.children;
         const iconName = this.props.icon;
 
@@ -62,37 +67,40 @@ class MfdControl extends Component {
         const iconColor = this.state.pressed ? 'disabled' : iconBaseColor;
         const variant= this.props.variant ? this.props.variant : 'text';
 
-        const s = this.props.size ? this.props.size : 1;
+        const xs = this.props.size ? this.props.size : 3;
+
         const size = this.sizes[this.props.width];
-        let tileSize = s * size;
+        let tileSize = xs * size;
         let iconSize = size / 7 * 4;
-        console.log(this.props, s, this.sizes, size);
 
         return (
-            <Button
-            onClick={this.handleClick}
-            color={color}
-            variant={variant}
-            style={{width: tileSize}}
-            className={classes.control}>
-                { command && (
-                <div>
-                    { iconName &&
-                    <Icon
-                        style={{ fontSize: iconSize }}
-                        color={iconColor}>
-                        {iconName}
-                    </Icon>
-                     }
-                    <Typography className={classes.label} variant="button" color={labelColor}>{label}</Typography>
-                </div>
-                )}
-            </Button>
+            <Grid item xs={xs} classNames={classes.item}>
+                <Button
+                onClick={this.handleClick}
+                color={color}
+                variant={variant}
+                style={{width: tileSize}}
+                className={classes.control}>
+                    <div>
+                        { iconName &&
+                        <Icon
+                            style={{ fontSize: iconSize }}
+                            color={iconColor}>
+                            {iconName}
+                        </Icon>
+                        }
+                        <Typography className={classes.label} variant="button" color={labelColor}>{label}</Typography>
+                    </div>
+                </Button>
+            </Grid>
         )
     }
 }
 
 const styles = theme => ({
+    item: {
+        align: 'center',
+    },
     control: {
         '&:hover': {
             backgroundColor: 'transparent',
@@ -108,8 +116,8 @@ const styles = theme => ({
     }
 });
 
-MfdControl.propTypes = {
+GridButton.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withWidth()(MfdControl));
+export default withStyles(styles)(withWidth()(GridButton));

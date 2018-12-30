@@ -22,7 +22,6 @@ class ConnectionSettings extends Component {
     };
 
     componentDidMount() {
-        console.debug('ConnectionSettings.componentDidMount()');
         this.setState({
             server: this.props.RatatoskrStore.server,
             port: this.props.RatatoskrStore.port,

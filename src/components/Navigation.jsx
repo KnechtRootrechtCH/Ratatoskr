@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {inject, observer} from 'mobx-react';
-
 import { withStyles } from '@material-ui/core/styles';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+
+import NavbarButton from './buttons/NavbarButton'
 
 import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-
-import CommunicationsIcon from '@material-ui/icons/Headset'
-import BasicsIcon from '@material-ui/icons/Dvr';
-import IfcsIcon from '@material-ui/icons/Flight'
-import PowerIcon from '@material-ui/icons/BatteryChargingFull'
-import ShieldsIcon from '@material-ui/icons/Security'
-// import TargetingIcon from '@material-ui/icons/Flare'
-
-// import SettingsIcon from '@material-ui/icons/Settings'
+import Toolbar from '@material-ui/core/Toolbar'
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
@@ -31,7 +21,6 @@ class Navigation extends Component {
     render () {
         const classes = this.props.classes;
 
-        const showLabels = isWidthUp('sm', this.props.width);
         let tab = this.props.RatatoskrStore.tab;
         if (tab === 'settings') {
             tab = false;
@@ -44,36 +33,34 @@ class Navigation extends Component {
 
         return (
             ( show &&
-            <AppBar className={barClass} position="fixed" color={ themedNavbar ? "secondary" : "default" }>
-                <Tabs className={classes.tabs} value={tab} onChange={this.handleChange} indicatorColor="primary" centered fullWidth>
-                    <Tab
-                        value="core"
-                        label={ showLabels ? "Main" : null }
-                        icon={<BasicsIcon/>}/>
-                    <Tab
-                        value="ifcs"
-                        label={ showLabels ? "IFCS" : null }
-                        icon={<IfcsIcon/>}/>
-                    <Tab
-                        value="power"
-                        label={ showLabels ? "Power" : null }
-                        icon={<PowerIcon/>}/>
-                    <Tab
-                        value="shields"
-                        label={ showLabels ? "Shields" : null }
-                        icon={<ShieldsIcon/>}/>
-                    <Tab
-                        value="comms"
-                        label={ showLabels ? "Comms" : null }
-                        icon={<CommunicationsIcon/>}/>
-                </Tabs>
+            <AppBar className={barClass} position="fixed" color={ themedNavbar ? "primary" : "default" }>
+                <Toolbar>
+                    <NavbarButton
+                        icon='home'
+                        route='/'
+                        variant='text'>Menu</NavbarButton>
+                    <div className={classes.grow}>
+                    </div>
+                    <NavbarButton
+                        command='Power'
+                        icon='power_settings_new'
+                        variant='text'>Power</NavbarButton>
+                    <NavbarButton
+                        command='Power_Engines'
+                        icon='blur_circular'
+                        variant='text'>Engines</NavbarButton>
+                    <NavbarButton
+                        command='MobiGlas'
+                        icon='dvr'
+                        variant='text'>Mobiglass</NavbarButton>
+                </Toolbar>
             </AppBar>
             )
         );
      }
 }
 
-const styles = {
+const styles = theme => ({
     barTop: {
         flexGrow: 1,
         width: '100%',
@@ -84,15 +71,20 @@ const styles = {
         top: 'auto',
         bottom: 0,
     },
-    barLeft: {
-
+    root: {
+        flexGrow: 1,
     },
-    tabs: {
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
     }
-};
+});
 
 Navigation.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withWidth()(Navigation));
+export default withStyles(styles)(Navigation);

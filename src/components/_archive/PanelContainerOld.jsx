@@ -7,15 +7,16 @@ import SwipeableViews from 'react-swipeable-views';
 
 import CorePanel from './panels/CorePanel'
 import IfcsPanel from './panels/IfcsPanel'
+import MenuPanel from './panels/MenuPanel'
 import SettingsPanel from './panels/SettingsPanel'
 import MfdPanel from './MfdPanel';
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
 @observer
-class MfdPanelContainer extends Component {
+class PanelContainer extends Component {
     state = {
-        tabs: ['core', 'ifcs', 'power', 'shields', 'comms']
+        tabs: ['menu', 'core', 'ifcs', 'power', 'shields', 'comms', 'settings']
     };
 
 
@@ -28,27 +29,28 @@ class MfdPanelContainer extends Component {
     render () {
         const { classes } = this.props;
         const theme = this.props.ThemeStore.theme;
-        const show = this.props.RatatoskrStore.tab !== 'settings';
 
         let index = this.state.tabs.indexOf(this.props.RatatoskrStore.tab);
         if (index < 0) {
             index = 0;
         }
 
+        console.debug(this.state.tab, index);
+
         return (
-            ( show &&
-                <SwipeableViews
-                    className={classes.container}
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                    index={index}
-                    onChangeIndex={this.handleChangeIndex}>
-                    <MfdPanel title='Main Systems'><CorePanel/></MfdPanel>
-                    <MfdPanel title='I.F.C.S.'><IfcsPanel/></MfdPanel>
-                    <MfdPanel title='Power Management'><SettingsPanel/></MfdPanel>
-                    <MfdPanel title='Shield Management'><SettingsPanel/></MfdPanel>
-                    <MfdPanel title='Communications'><SettingsPanel/></MfdPanel>
-                </SwipeableViews>
-            )
+            <SwipeableViews
+                className={classes.container}
+                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                index={index}
+                onChangeIndex={this.handleChangeIndex}>
+                <MfdPanel title='Menu'><MenuPanel/></MfdPanel>
+                <MfdPanel title='Main Systems'><CorePanel/></MfdPanel>
+                <MfdPanel title='I.F.C.S.'><IfcsPanel/></MfdPanel>
+                <MfdPanel title='Power Management'><CorePanel/></MfdPanel>
+                <MfdPanel title='Shield Management'><CorePanel/></MfdPanel>
+                <MfdPanel title='Communications'><CorePanel/></MfdPanel>
+                <MfdPanel title='Settings'><SettingsPanel/></MfdPanel>
+            </SwipeableViews>
         )
     }
 }
@@ -59,8 +61,8 @@ const styles = theme => ({
       },
 });
 
-MfdPanelContainer.propTypes = {
+PanelContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MfdPanelContainer);
+export default withStyles(styles)(PanelContainer);

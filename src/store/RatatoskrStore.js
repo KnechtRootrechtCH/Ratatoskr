@@ -38,7 +38,6 @@ class RatatoskrStore {
     @action loadConnection = () => {
         const server = LocalStorageService.loadServer();
         const port = LocalStorageService.loadPort();
-        console.debug("RatatoskrStore.loadConnection() =>", server, port)
         if (server) {
             this.server = server;
         }
@@ -67,7 +66,7 @@ class RatatoskrStore {
         this.testingConnection = true;
         RatatoskrService.testConnection(this.server, this.port)
             .then((result) => {
-                console.debug("RatatoskrStore.testConnection() =>", result.connected)
+                console.debug("RatatoskrStore.testConnection() : success =>", result.connected)
                 this.connected = result.connected;
                 this.testingConnection = false;
             });
