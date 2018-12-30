@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {inject, observer} from 'mobx-react';
-
 import { withStyles } from '@material-ui/core/styles';
+import Link from 'react-router-dom/Link'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import Button from '@material-ui/core/Button';
@@ -15,33 +15,10 @@ class NavbarButton extends Component {
     state = {
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            command: props.command,
-            tab: props.tab,
-            pressed: false,
-        }
-    }
-
-    setPressed(pressed) {
-        this.setState({
-            pressed: pressed,
-        })
-    }
-
     handleClick = () => {
-        if (this.state.command) {
-            this.props.RatatoskrStore.executeCommand(this.state.command);
-        } else if (this.state.tab) {
-            this.props.RatatoskrStore.setTab(this.state.tab);
-        } else {
-            return;
+        if (this.props.command) {
+            this.props.RatatoskrStore.executeCommand(this.props.command);
         }
-        this.setPressed(true);
-        setTimeout(() => {
-            this.setPressed(false)
-        }, 350);
     }
 
     render () {
@@ -52,14 +29,34 @@ class NavbarButton extends Component {
 
         const color = this.props.color ? this.props.color : 'inherit';
         const labelColor = this.props.labelColor ? this.props.labelColor : 'inherit';
-        const iconBaseColor = this.props.iconColor ? this.props.iconColor: 'inherit';
-        const iconColor = this.state.pressed ? 'disabled' : iconBaseColor;
+        const iconColor = this.props.iconColor ? this.props.iconColor: 'inherit';
         const variant= this.props.variant ? this.props.variant : 'text';
 
         const showLabels = isWidthUp('sm', this.props.width);
 
+        const route = this.props.route;
+
         return (
+            (route ? (
             <Button
+                color={color}
+                variant={variant}
+                component={Link}
+                to={route}
+                className={classes.navbarButton}>
+                    { iconName &&
+                    <Icon
+                        className={classes.icon}
+                        color={iconColor}>
+                        {iconName}
+                    </Icon>
+                    }
+                    { showLabels &&
+                        <Typography className={classes.label} variant="button" color={labelColor} noWrap>{label}</Typography>
+                    }
+            </Button>
+            ):(
+                <Button
                 onClick={this.handleClick}
                 color={color}
                 variant={variant}
@@ -75,6 +72,8 @@ class NavbarButton extends Component {
                         <Typography className={classes.label} variant="button" color={labelColor} noWrap>{label}</Typography>
                     }
             </Button>
+            ))
+
         )
     }
 }
@@ -82,6 +81,9 @@ class NavbarButton extends Component {
 const styles = theme => ({
     navbarButton: {
         margin: 0,
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
     },
     icon: {
     },
