@@ -23,7 +23,7 @@ class App extends Component {
     const { classes } = this.props;
     const theme = this.props.ThemeStore.theme;
     const themedNavbar = this.props.ThemeStore.themedNavbar;
-    const navbarColor = themedNavbar ? theme.palette.secondary['500'] : theme.palette.grey['900'];
+    const navbarColor = themedNavbar ? theme.palette.primary['500'] : theme.palette.grey['900'];
 
     return (
       <BrowserRouter>
