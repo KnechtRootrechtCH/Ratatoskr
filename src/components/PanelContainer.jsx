@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import ScreenRotationIcon from '@material-ui/icons/ScreenRotation'
 
 import MenuPanel from './panels/MenuPanel';
-import SettingsPanel from './panels/SettingsPanel';
+import PanelsService from '../service/PanelsService';
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
@@ -23,11 +23,13 @@ class PanelContainer extends Component {
     render () {
         const { classes } = this.props;
 
-        const noNavbar = this.props.ThemeStore.navbarPosition === 'none';
+        const noNavbar = this.props.ThemeStore.navigationMode === 'drawer';
         const topNavbar = !noNavbar && this.props.ThemeStore.navbarPosition === 'top';
         const bottomNavbar = !noNavbar && this.props.ThemeStore.navbarPosition === 'bottom';
 
         const rotateScreen = !isWidthUp('sm', this.props.width);
+
+        const panels = PanelsService.panels;
 
         return (
             <div className={classes.container}>
@@ -44,9 +46,12 @@ class PanelContainer extends Component {
                     </div>
                 ) : (
                     <Switch>
-                        <Route path='/' exact component={MenuPanel}/>
-
-                        <Route path='/settings' exact component={SettingsPanel}/>
+                        { panels.map((panel) => {
+                            return (
+                                <Route key={panel.key} path={panel.route} exact component={panel.component}/>
+                            )
+                        })}
+                        <Route key='home' path='/' component={MenuPanel}/>
                     </Switch>
                 )}
                 { bottomNavbar &&

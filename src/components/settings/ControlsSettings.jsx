@@ -32,6 +32,9 @@ class ControlsSettings extends Component {
     render () {
         const { classes } = this.props;
 
+        let controlsColor = this.props.ThemeStore.controlsColor;
+        controlsColor = controlsColor === 'inherit' ? 'default' : controlsColor;
+
         return (
             <div className={classes.settings}>
                 <Grid container spacing={8}>
@@ -43,9 +46,9 @@ class ControlsSettings extends Component {
                             className={classes.radioGroup}
                             value={this.state.color}
                             onChange={this.handleControlsColorChange}>
-                            <FormControlLabel value='inherit' control={<Radio color='primary'/>} label='Default' />
-                            <FormControlLabel value='primary' control={<Radio color='primary'/>} label='Primary' />
-                            <FormControlLabel value='secondary' control={<Radio color='primary'/>} label='Secondary' />
+                            <FormControlLabel value='inherit' control={<Radio color={controlsColor}/>} label='Default' />
+                            <FormControlLabel value='primary' control={<Radio color={controlsColor}/>} label='Primary' />
+                            <FormControlLabel value='secondary' control={<Radio color={controlsColor}/>} label='Secondary' />
                         </RadioGroup>
                     </Grid>
                 </Grid>

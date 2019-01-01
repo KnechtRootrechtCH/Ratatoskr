@@ -3,59 +3,43 @@ import PropTypes from 'prop-types';
 import {inject, observer} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 
-import NavbarButton from './buttons/NavbarButton'
+import NavigationDrawer from './NavigationDrawer'
+import NavigationTabs from './NavigationTabs'
+import NavigationToolbar from './NavigationToolbar'
 
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
+import { AppBar } from '@material-ui/core';
+
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
 @observer
 class Navigation extends Component {
 
-    handleChange = (event, value) => {
-        event.preventDefault();
-        this.props.RatatoskrStore.setTab(value);
-    };
-
     render () {
         const classes = this.props.classes;
 
-        let tab = this.props.RatatoskrStore.tab;
-        if (tab === 'settings') {
-            tab = false;
-        }
+        const navigationMode = this.props.ThemeStore.navigationMode;
+        const showAppBar  = navigationMode !== 'drawer';
+        const tabs = navigationMode === 'tabs';
 
         const navbarColor = this.props.ThemeStore.navbarColor;
+
         const bottomNavbar = this.props.ThemeStore.navbarPosition === 'bottom';
         const barClass = bottomNavbar ? classes.barBottom : classes.barTop;
-        const show  = this.props.ThemeStore.navbarPosition !== 'none';
 
         return (
-            ( show &&
-            <AppBar className={barClass} position="fixed" color={navbarColor}>
-                <Toolbar>
-                    <NavbarButton
-                        icon='home'
-                        route='/'
-                        variant='text'>Menu</NavbarButton>
-                    <div className={classes.grow}>
-                    </div>
-                    <NavbarButton
-                        command='Power'
-                        icon='power_settings_new'
-                        variant='text'>Power</NavbarButton>
-                    <NavbarButton
-                        command='Power_Engines'
-                        icon='blur_circular'
-                        variant='text'>Engines</NavbarButton>
-                    <NavbarButton
-                        command='MobiGlas'
-                        icon='dvr'
-                        variant='text'>Mobiglass</NavbarButton>
-                </Toolbar>
+            ( showAppBar ? (
+            <AppBar className={barClass} position='fixed' color={navbarColor}>
+                {tabs ?
+                (
+                <NavigationTabs/>
+                ):(
+                <NavigationToolbar/>
+                )}
             </AppBar>
-            )
+            ) : (
+            <NavigationDrawer/>
+            ))
         );
      }
 }
@@ -71,16 +55,6 @@ const styles = theme => ({
         top: 'auto',
         bottom: 0,
     },
-    root: {
-        flexGrow: 1,
-    },
-    grow: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    }
 });
 
 Navigation.propTypes = {

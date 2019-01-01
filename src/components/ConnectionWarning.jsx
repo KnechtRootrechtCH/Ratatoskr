@@ -18,15 +18,6 @@ class ConnectionWarning extends Component {
     state = {
     };
 
-    handleChange = (event, value) => {
-        event.preventDefault();
-        this.props.RatatoskrStore.setTab(value);
-    };
-
-    handleClick = (event) => {
-        this.props.RatatoskrStore.setTab('settings');
-    }
-
     render () {
         const classes = this.props.classes;
         const connected = this.props.RatatoskrStore.connected;

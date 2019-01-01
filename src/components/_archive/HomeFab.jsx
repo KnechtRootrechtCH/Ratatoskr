@@ -18,7 +18,7 @@ class HomeFab extends Component {
 
     render () {
         const { classes } = this.props;
-        const noNavbar = this.props.ThemeStore.navbarPosition === 'none';
+        const noNavbar = this.props.ThemeStore.navigationMode === 'drawer';
         const location = this.props.location.pathname.toLowerCase();
         const show = noNavbar && location !== '/';
 

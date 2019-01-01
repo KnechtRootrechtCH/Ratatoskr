@@ -13,16 +13,25 @@ import Typography from '@material-ui/core/Typography';
 @observer
 class NavigationSettings extends Component {
     state = {
+        mode: 'menu',
         position: 'top',
         color: 'default',
     };
 
     componentDidMount() {
         this.setState({
+            mode: this.props.ThemeStore.navigationMode,
             position: this.props.ThemeStore.navbarPosition,
             color: this.props.ThemeStore.navbarColor,
         })
     }
+
+    handleNavigationModeChange = event => {
+        event.preventDefault();
+        const value = event.target.value;
+        this.setState({ mode: value });
+        this.props.ThemeStore.setNavigationMode(value);
+    };
 
     handleNavbarPositionChange = event => {
         event.preventDefault();
@@ -41,36 +50,62 @@ class NavigationSettings extends Component {
     render () {
         const { classes } = this.props;
 
+        let controlsColor = this.props.ThemeStore.controlsColor;
+        controlsColor = controlsColor === 'inherit' ? 'default' : controlsColor;
+
+        const showNavbarOptions = this.props.ThemeStore.navigationMode !== 'drawer' ;
+
         return (
             <div className={classes.settings}>
                 <Grid container spacing={8}>
                     <Grid item xs={12}>
+                        <Typography className={classes.header} variant='subtitle1' color='primary'>Navigation</Typography>
+                    </Grid>
+                    <Grid>
+                        <RadioGroup
+                            className={classes.radioGroup}
+                            value={this.state.mode}
+                            onChange={this.handleNavigationModeChange}>
+                            <FormControlLabel value='menu' control={<Radio color={controlsColor}/>} label='Menu' />
+                            <FormControlLabel value='tabs' control={<Radio color={controlsColor}/>} label='Tabs' />
+                            <FormControlLabel value='drawer' control={<Radio color={controlsColor}/>} label='Swipeable Drawer' />
+                        </RadioGroup>
+                    </Grid>
+
+                    { showNavbarOptions && (
+                    <Grid item xs={12}>
                         <Typography className={classes.header} variant='subtitle1' color='primary'>Navbar Position</Typography>
                     </Grid>
+                    )}
+                    { showNavbarOptions && (
                     <Grid>
                         <RadioGroup
                             className={classes.radioGroup}
                             value={this.state.position}
                             onChange={this.handleNavbarPositionChange}>
-                            <FormControlLabel value='top' control={<Radio color='primary'/>} label='Top' />
-                            <FormControlLabel value='bottom' control={<Radio color='primary'/>} label='Bottom' />
-                            <FormControlLabel value='none' control={<Radio color='primary'/>} label='Disabled' />
+                            <FormControlLabel value='top' control={<Radio color={controlsColor}/>} label='Top' />
+                            <FormControlLabel value='bottom' control={<Radio color={controlsColor}/>} label='Bottom' />
                         </RadioGroup>
                     </Grid>
+                    )}
 
+                    { showNavbarOptions && (
                     <Grid item xs={12}>
                     <   Typography className={classes.header} variant='subtitle1' color='primary'>Navbar Color</Typography>
                     </Grid>
+                    )}
+                    { showNavbarOptions && (
                     <Grid>
                         <RadioGroup
                             className={classes.radioGroup}
                             value={this.state.color}
                             onChange={this.handleNavbarColorChange}>
-                            <FormControlLabel value='default' control={<Radio color='primary'/>} label='Default' />
-                            <FormControlLabel value='primary' control={<Radio color='primary'/>} label='Primary' />
-                            <FormControlLabel value='secondary' control={<Radio color='primary'/>} label='Secondary' />
+                            <FormControlLabel value='default' control={<Radio color={controlsColor}/>} label='Default' />
+                            <FormControlLabel value='primary' control={<Radio color={controlsColor}/>} label='Primary' />
+                            <FormControlLabel value='secondary' control={<Radio color={controlsColor}/>} label='Secondary' />
                         </RadioGroup>
                     </Grid>
+                    )}
                 </Grid>
             </div>
         )

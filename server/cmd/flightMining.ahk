@@ -1,8 +1,8 @@
 FireMiningLaser_On() {
-    MouseClick, down
+    Click, down
 }
 FireMiningLaser_Off() {
-    MouseClick, up
+    Click, up
 }
 SwitchMiningLaser_Toggle() {
     MouseClick, right

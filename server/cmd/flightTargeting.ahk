@@ -76,13 +76,13 @@ MiningMode_Toggle() {
     SendRaw, /
 }
 ScanningRadarPing() {
-    MouseClick
+    Click
 }
 ScanningRadarPing_On() {
-    MouseClick, down
+    Click, down
 }
 ScanningRadarPing_Off() {
-    MouseClick, up
+    Click, up
 }
 ScanningAngleIncrease() {
     Send {LAlt down}

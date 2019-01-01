@@ -7,7 +7,6 @@ import MetaTags from 'react-meta-tags';
 import { BrowserRouter, Route} from 'react-router-dom'
 
 import ConnectionWarning from './components/ConnectionWarning';
-import HomeFab from './components/HomeFab';
 import PanelContainer from './components/PanelContainer';
 import Navigation from './components/Navigation';
 
@@ -37,7 +36,6 @@ class App extends Component {
           </MetaTags>
           <MuiThemeProvider theme={theme}>
             <Navigation/>
-            <HomeFab/>
             <Route render={({location}) => (
               <PanelContainer location={location}/>
             )}/>

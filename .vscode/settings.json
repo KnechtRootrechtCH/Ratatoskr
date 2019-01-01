@@ -1,5 +1,6 @@
 {
     "files.exclude": {
+        "**/_archive/**": true,
         "node_modules/**": true
     }
 }

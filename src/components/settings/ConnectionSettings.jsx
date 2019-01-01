@@ -14,6 +14,7 @@ import TestingIcon from '@material-ui/icons/Autorenew';
 import WarningIcon from '@material-ui/icons/Warning';
 
 @inject('RatatoskrStore')
+@inject('ThemeStore')
 @observer
 class ConnectionSettings extends Component {
     state = {
@@ -53,6 +54,9 @@ class ConnectionSettings extends Component {
         const disabled = testingConnection;
         const error = !connected && !testingConnection;
 
+        const controlsColor = this.props.ThemeStore.controlsColor;
+        const controlsVariant = controlsColor === 'inherit' ? 'contained' : 'outlined'
+
         let helperText = '';
         if (testingConnection) {
             helperText = 'Testing connection...';
@@ -68,14 +72,14 @@ class ConnectionSettings extends Component {
             <div className={classes.settings}>
                 <Grid container spacing={8}>
                     <Grid item xs={12}>
-                        <Typography className={classes.header} variant="subtitle1" color="primary">Connection</Typography>
+                        <Typography className={classes.header} variant='subtitle1' color='primary'>Connection</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                        label="Server"
+                        label='Server'
                         className={classes.textField}
-                        placeholder="0.0.0.0"
-                        variant="filled"
+                        placeholder='0.0.0.0'
+                        variant='filled'
                         error={error}
                         onChange={this.handleServerChange}
                         value={this.state.server}
@@ -85,10 +89,10 @@ class ConnectionSettings extends Component {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                        label="Port"
+                        label='Port'
                         className={classes.textField}
-                        placeholder="123"
-                        variant="filled"
+                        placeholder='123'
+                        variant='filled'
                         error={error}
                         helperText={helperText}
                         value={this.state.port}
@@ -100,8 +104,8 @@ class ConnectionSettings extends Component {
                     <Grid item xs={12}>
                         <Button
                             className={classes.button}
-                            color="primary"
-                            variant="outlined"
+                            color={controlsColor}
+                            variant={controlsVariant}
                             onClick={this.handleSave}
                             disabled={disabled}>
                                 <SaveIcon className={classes.icon}/>

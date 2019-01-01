@@ -42,6 +42,9 @@ class ThemeSettings extends Component {
         const { classes } = this.props;
         const darkTheme = this.props.ThemeStore.type === 'dark';
 
+        let controlsColor = this.props.ThemeStore.controlsColor;
+        controlsColor = controlsColor === 'inherit' ? 'default' : controlsColor;
+
         return (
             <div className={classes.settings}>
                 <Grid container className={classes.palette} spacing={8}>
@@ -68,7 +71,7 @@ class ThemeSettings extends Component {
                                 <Switch
                                 checked={darkTheme}
                                 onChange={this.handleTypeSwitch}
-                                color="primary"/>
+                                color={controlsColor}/>
                             }
                             label={
                                 <Typography variant="caption">Dark mode</Typography>

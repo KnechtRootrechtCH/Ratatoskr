@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
 import GridButton from '../buttons/GridButton';
 
+import PanelsService from '../../service/PanelsService';
+
 @inject('RatatoskrStore')
 @inject('ThemeStore')
 @observer
@@ -15,60 +17,26 @@ class MenuPanel extends Component {
     render () {
         const { classes } = this.props;
 
-        const connected = this.props.RatatoskrStore.connected;
+        const panels = PanelsService.panels;
+
+        console.debug('MenuPanel.render()');
 
         return (
             <div className={classes.container}>
                 <Grid container spacing={16}>
-                    <GridButton
-                        disabled={!connected}
-                        icon='group_work'
-                        size={3}>
-                        Basic Controls
-                    </GridButton>
-                    <GridButton
-                        disabled={!connected}
-                        icon='memory'
-                        size={3}>
-                        Flight Systems
-                    </GridButton>
-                    <GridButton
-                        disabled={!connected}
-                        icon='battery_charging_full'
-                        size={3}>
-                        Power Management
-                    </GridButton>
-                    <GridButton
-                        disabled={!connected}
-                        icon='security'
-                        size={3}>
-                        Shield Management
-                    </GridButton>
-                    <GridButton
-                        disabled={!connected}
-                        icon='gps_fixed'
-                        size={3}>
-                        Targeting Systems
-                    </GridButton>
-                    <GridButton
-                        disabled={!connected}
-                        icon='wifi_tethering'
-                        size={3}>
-                        Industrial
-                    </GridButton>
-                    <GridButton
-                        disabled={!connected}
-                        icon='headset'
-                        size={3}>
-                        Communications
-                    </GridButton>
-                    <GridButton
-                        icon='settings'
-                        route='/settings'
-                        highlight={!connected}
-                        size={3}>
-                        Settings
-                    </GridButton>
+                    { panels.map((panel) => {
+                        return (
+                            ( panel.menu && (
+                            <GridButton
+                                key={panel.key}
+                                icon={panel.icon}
+                                route={panel.route}
+                                size={3}>
+                                {panel.name}
+                            </GridButton>
+                            ))
+                        )
+                    })}
                 </Grid>
             </div>
         );

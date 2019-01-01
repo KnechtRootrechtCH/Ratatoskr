@@ -22,8 +22,11 @@ class ThemeStore {
   @observable secondary = {};
   @observable type = '';
 
+  @observable advancedMode = false;
+
   @observable controlsColor = 'inherit';
 
+  @observable navigationMode = 'menu';
   @observable navbarPosition = 'bottom';
   @observable navbarColor = 'default';
 
@@ -47,6 +50,13 @@ class ThemeStore {
     const type = LocalStorageService.loadThemeType();
     if (type) {
       this.type = type;
+    }
+
+    this.advancedMode = LocalStorageService.loadAdvancedMode();
+
+    const navigationMode = LocalStorageService.loadNavigationMode();
+    if (navigationMode) {
+      this.navigationMode = navigationMode;
     }
 
     const controlsColor = LocalStorageService.loadControlsColor();
@@ -85,6 +95,16 @@ class ThemeStore {
     this.type = type;
   }
 
+  @action setAdvancedMode(mode) {
+    this.advancedMode = mode;
+    LocalStorageService.saveAdvancedMode(mode);
+  }
+
+  @action setNavigationMode(mode) {
+    this.navigationMode = mode;
+    LocalStorageService.saveNavigationMode(mode);
+  }
+
   @action setControlsColor(value) {
     this.controlsColor = value;
     LocalStorageService.saveControlsColor(value);
@@ -119,9 +139,9 @@ class ThemeStore {
     });
     console.debug("ThemeStore.applyTheme() : ", theme);
     this.theme = theme;
-    LocalStorageService.saveThemeType(this.type);
     LocalStorageService.savePrimaryColor(this.primary);
     LocalStorageService.saveSecondaryColor(this.secondary);
+    LocalStorageService.saveThemeType(this.type);
   }
 }
 

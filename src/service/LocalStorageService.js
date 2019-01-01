@@ -8,11 +8,17 @@ class LocalStorageService {
     themeTypeKey = 'ratatoskr.themeType';
     primaryColorKey = 'ratatoskr.primaryColor';
     secondaryColorKey = 'ratatoskr.secondaryColor';
-    controlsColorKey = 'ratatoskr.controlsColor';
 
-    // Navbar
+    //Advanced Mode
+    advancedModeKey = 'ratatoskr.advancedMode';
+
+    // Navigation
+    navigationModeKey = 'ratatoskr.navigationMode';
     navbarPositionKey = 'ratatoskr.navbarPosition';
     navbarColorKey = 'ratatoskr.navbarColor';
+
+    // Controls
+    controlsColorKey = 'ratatoskr.controlsColor';
 
     loadServer() {
         return localStorage.getItem(this.serverKey);
@@ -24,6 +30,14 @@ class LocalStorageService {
 
     loadThemeType() {
         return localStorage.getItem(this.themeTypeKey);
+    }
+
+    loadAdvancedMode() {
+        return JSON.parse(localStorage.getItem(this.advancedModeKey));
+    }
+
+    loadNavigationMode() {
+        return localStorage.getItem(this.navigationModeKey);
     }
 
     loadControlsColor() {
@@ -58,8 +72,16 @@ class LocalStorageService {
         localStorage.setItem(this.themeTypeKey, value);
     }
 
+    saveAdvancedMode(value) {
+        localStorage.setItem(this.advancedModeKey, JSON.stringify(value));
+    }
+
+    saveNavigationMode(value) {
+        localStorage.setItem(this.navigationModeKey, value);
+    }
+
     saveControlsColor(value) {
-        return localStorage.setItem(this.controlsColorKey, value);
+        localStorage.setItem(this.controlsColorKey, value);
     }
 
     savePrimaryColor(value) {
@@ -71,11 +93,11 @@ class LocalStorageService {
     }
 
     saveNavbarPosition(value) {
-        return localStorage.setItem(this.navbarPositionKey, value);
+        localStorage.setItem(this.navbarPositionKey, value);
     }
 
     saveNavbarColor(value) {
-        return localStorage.setItem(this.navbarColorKey, value);
+        localStorage.setItem(this.navbarColorKey, value);
     }
 }
 
