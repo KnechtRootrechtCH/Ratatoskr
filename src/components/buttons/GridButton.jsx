@@ -61,8 +61,6 @@ class GridButton extends Component {
 
         const showLabels = isWidthUp('sm', this.props.width);
 
-        const connected = this.props.RatatoskrStore.connected;
-
         return (
             <Grid
                 item
