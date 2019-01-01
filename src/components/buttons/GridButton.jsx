@@ -11,22 +11,23 @@ import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 
 @inject('RatatoskrStore')
+@inject('ThemeStore')
 @observer
 class GridButton extends Component {
     state = {
     };
 
     iconSizes = {
-        'xs': 14,
-        'sm': 14,
+        'xs': 12,
+        'sm': 18,
         'md': 24,
         'lg': 24,
         'xl': 32,
     }
 
     buttonSizes = {
-        'xs': 6,
-        'sm': 12,
+        'xs': 8,
+        'sm': 16,
         'md': 18,
         'lg': 24,
         'xl': 30,
@@ -41,6 +42,7 @@ class GridButton extends Component {
     render () {
         const { classes } = this.props;
 
+        const disabled = this.props.disabled;
         const size = this.props.size ? this.props.size : 3;
         const iconSize = this.iconSizes[this.props.width] * size;
         const buttonSize = this.buttonSizes[this.props.width] * size;
@@ -49,17 +51,20 @@ class GridButton extends Component {
         const label = this.props.label ? this.props.label : this.props.children;
         const iconName = this.props.icon;
 
-        // colors
-        const labelColor = this.props.labelColor ?  this.props.labelColor : 'inherit';
-        const iconColor = this.props.iconColor ?  this.props.iconColor : 'inherit';
-        const buttonColor = this.props.color ?  this.props.color : 'inherit';
+        const highlight = this.props.highlight;
+        const controlsColor = disabled ? 'disabled' : this.props.ThemeStore.controlsColor;
+        const highlightColor = controlsColor === 'primary' ? 'secondary' : 'primary';
+        const iconColor = highlight ? highlightColor : controlsColor;
+
+        const labelColor = this.props.labelColor && !disabled ?  this.props.labelColor : 'inherit';
+        const buttonColor = this.props.color && !disabled ?  this.props.color : 'inherit';
 
         const showLabels = isWidthUp('sm', this.props.width);
 
-        const disabled = this.props.disabled;
-
         return (
-            <Grid item xs={size}>
+            <Grid
+                item
+                xs={size}>
                 { route ? (
                 <Button
                     className={classes.button}

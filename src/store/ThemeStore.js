@@ -18,13 +18,14 @@ class ThemeStore {
     grey, blueGrey];
 
   @observable theme = {};
-
   @observable primary = {};
   @observable secondary = {};
   @observable type = '';
-  @observable themedNavbar = false;
-  @observable bottomNavbar = true;
-  @observable hideNavbar = false;
+
+  @observable controlsColor = 'inherit';
+
+  @observable navbarPosition = 'bottom';
+  @observable navbarColor = 'default';
 
   @observable defaultPrimary = amber;
   @observable defaultSecondary = indigo;
@@ -32,15 +33,6 @@ class ThemeStore {
 
   constructor () {
     this.setDefaultTheme();
-
-    const type = LocalStorageService.loadThemeType();
-    if (type) {
-      this.type = type;
-    }
-
-    this.themedNavbar = LocalStorageService.loadThemedNavbar();
-    this.bottomNavbar = LocalStorageService.loadBottomNavbar();
-    this.hideNavbar = LocalStorageService.loadHideNavbar();
 
     const primary = LocalStorageService.loadPrimaryColor();
     if (primary && primary['500']) {
@@ -52,6 +44,26 @@ class ThemeStore {
       this.secondary = secondary;
     }
 
+    const type = LocalStorageService.loadThemeType();
+    if (type) {
+      this.type = type;
+    }
+
+    const controlsColor = LocalStorageService.loadControlsColor();
+    if (controlsColor) {
+      this.controlsColor = controlsColor;
+    }
+
+    const navbarPosition = LocalStorageService.loadNavbarPosition();
+    if (navbarPosition) {
+      this.navbarPosition = navbarPosition;
+    }
+
+    const navbarColor = LocalStorageService.loadNavbarColor();
+    if (navbarColor) {
+      this.navbarColor = navbarColor;
+    }
+
     this.applyTheme();
   }
 
@@ -61,31 +73,31 @@ class ThemeStore {
     this.setSecondary(this.defaultSecondary);
   }
 
-  @action setType(type) {
-    this.type = type;
-  }
-
-  @action setThemedNavbar(value) {
-    this.themedNavbar = value;
-    LocalStorageService.saveThemedNavbar(this.themedNavbar);
-  }
-
-  @action setBottomNavbar(value) {
-    this.bottomNavbar = value;
-    LocalStorageService.saveBottomNavbar(this.bottomNavbar);
-  }
-
-  @action setHideNavbar(value) {
-    this.hideNavbar = value;
-    LocalStorageService.saveHideNavbar(this.hideNavbar);
-  }
-
   @action setPrimary(color) {
     this.primary = color;
   }
 
   @action setSecondary(color) {
     this.secondary = color;
+  }
+
+  @action setType(type) {
+    this.type = type;
+  }
+
+  @action setControlsColor(value) {
+    this.controlsColor = value;
+    LocalStorageService.saveControlsColor(value);
+  }
+
+  @action setNavbarPosition(value) {
+    this.navbarPosition = value;
+    LocalStorageService.saveNavbarPosition(value);
+  }
+
+  @action setNavbarColor(value) {
+    this.navbarColor = value;
+    LocalStorageService.saveNavbarColor(value);
   }
 
   @action applyTheme() {

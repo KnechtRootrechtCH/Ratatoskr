@@ -26,14 +26,14 @@ class Navigation extends Component {
             tab = false;
         }
 
-        const themedNavbar = this.props.ThemeStore.themedNavbar;
-        const bottomNavbar = this.props.ThemeStore.bottomNavbar;
+        const navbarColor = this.props.ThemeStore.navbarColor;
+        const bottomNavbar = this.props.ThemeStore.navbarPosition === 'bottom';
         const barClass = bottomNavbar ? classes.barBottom : classes.barTop;
-        const show  = !this.props.ThemeStore.hideNavbar;
+        const show  = this.props.ThemeStore.navbarPosition !== 'none';
 
         return (
             ( show &&
-            <AppBar className={barClass} position="fixed" color={ themedNavbar ? "primary" : "default" }>
+            <AppBar className={barClass} position="fixed" color={navbarColor}>
                 <Toolbar>
                     <NavbarButton
                         icon='home'

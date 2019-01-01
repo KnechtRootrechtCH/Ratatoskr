@@ -33,9 +33,10 @@ class ConnectionWarning extends Component {
         const location = this.props.location.pathname.toLowerCase();
         const show = !connected && !location.includes('settings');
 
-        const bottomNavbar = this.props.ThemeStore.bottomNavbar;
-        const hideNavbar = this.props.ThemeStore.hideNavbar;
-        const verticalPosition = hideNavbar || bottomNavbar ? 'top' : 'bottom';
+        let verticalPosition = 'top';
+        if (this.props.ThemeStore.navbarPosition === 'top') {
+            verticalPosition = 'bottom';
+        }
 
         return (
                 <Snackbar

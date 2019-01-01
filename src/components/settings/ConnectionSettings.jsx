@@ -68,7 +68,7 @@ class ConnectionSettings extends Component {
             <div className={classes.settings}>
                 <Grid container spacing={8}>
                     <Grid item xs={12}>
-                        <Typography className={classes.header} variant="subtitle1" color="primary">Connection settings</Typography>
+                        <Typography className={classes.header} variant="subtitle1" color="primary">Connection</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField

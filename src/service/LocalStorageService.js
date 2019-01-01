@@ -1,14 +1,18 @@
 
 class LocalStorageService {
+    // Connection
     serverKey = 'ratatoskr.server';
     portKey = 'ratatoskr.port';
-    tabKey = 'ratatoskr.tab';
+
+    // Theme
     themeTypeKey = 'ratatoskr.themeType';
-    ThemedNavbarKey = 'ratatoskr.ThemedNavbar';
     primaryColorKey = 'ratatoskr.primaryColor';
     secondaryColorKey = 'ratatoskr.secondaryColor';
-    bottomNavbarKey = 'ratatoskr.bottomNavbar';
-    hideNavbarKey = 'ratatoskr.hideNavbar';
+    controlsColorKey = 'ratatoskr.controlsColor';
+
+    // Navbar
+    navbarPositionKey = 'ratatoskr.navbarPosition';
+    navbarColorKey = 'ratatoskr.navbarColor';
 
     loadServer() {
         return localStorage.getItem(this.serverKey);
@@ -18,16 +22,12 @@ class LocalStorageService {
         return localStorage.getItem(this.portKey);
     }
 
-    loadTab() {
-        return localStorage.getItem(this.tabKey);
-    }
-
     loadThemeType() {
         return localStorage.getItem(this.themeTypeKey);
     }
 
-    loadThemedNavbar() {
-        return JSON.parse(localStorage.getItem(this.ThemedNavbarKey));
+    loadControlsColor() {
+        return localStorage.getItem(this.controlsColorKey);
     }
 
     loadPrimaryColor() {
@@ -38,12 +38,12 @@ class LocalStorageService {
         return JSON.parse(localStorage.getItem(this.secondaryColorKey));
     }
 
-    loadBottomNavbar() {
-        return JSON.parse(localStorage.getItem(this.bottomNavbarKey));
+    loadNavbarPosition() {
+        return localStorage.getItem(this.navbarPositionKey);
     }
 
-    loadHideNavbar() {
-        return JSON.parse(localStorage.getItem(this.hideNavbarKey));
+    loadNavbarColor() {
+        return localStorage.getItem(this.navbarColorKey);
     }
 
     saveServer(value) {
@@ -54,16 +54,12 @@ class LocalStorageService {
         localStorage.setItem(this.portKey, value);
     }
 
-    saveTab(value) {
-        localStorage.setItem(this.tabKey, value);
-    }
-
     saveThemeType(value) {
         localStorage.setItem(this.themeTypeKey, value);
     }
 
-    saveThemedNavbar(value) {
-        return localStorage.setItem(this.ThemedNavbarKey, JSON.stringify(value));
+    saveControlsColor(value) {
+        return localStorage.setItem(this.controlsColorKey, value);
     }
 
     savePrimaryColor(value) {
@@ -74,12 +70,12 @@ class LocalStorageService {
         localStorage.setItem(this.secondaryColorKey, JSON.stringify(value));
     }
 
-    saveBottomNavbar(value) {
-        localStorage.setItem(this.bottomNavbarKey, JSON.stringify(value));
+    saveNavbarPosition(value) {
+        return localStorage.setItem(this.navbarPositionKey, value);
     }
 
-    saveHideNavbar(value) {
-        localStorage.setItem(this.hideNavbarKey, JSON.stringify(value));
+    saveNavbarColor(value) {
+        return localStorage.setItem(this.navbarColorKey, value);
     }
 }
 

@@ -16,29 +16,21 @@ class MenuPanel extends Component {
         const { classes } = this.props;
 
         const connected = this.props.RatatoskrStore.connected;
-        const settingsColor = connected ? 'inherit' : 'primary';
-
-        const noNavbar = this.props.ThemeStore.hideNavbar;
-        const topNavbar = !noNavbar && !this.props.ThemeStore.bottomNavbar;
-        const bottomNavbar = !noNavbar && this.props.ThemeStore.bottomNavbar;
 
         return (
             <div className={classes.container}>
-                { topNavbar &&
-                    <div className={classes.spacer}/>
-                }
-                <Grid container spacing={24}>
+                <Grid container spacing={16}>
                     <GridButton
                         disabled={!connected}
                         icon='group_work'
                         size={3}>
-                        Core Systems
+                        Basic Controls
                     </GridButton>
                     <GridButton
                         disabled={!connected}
                         icon='memory'
                         size={3}>
-                        I.F.C.S.
+                        Flight Systems
                     </GridButton>
                     <GridButton
                         disabled={!connected}
@@ -56,13 +48,13 @@ class MenuPanel extends Component {
                         disabled={!connected}
                         icon='gps_fixed'
                         size={3}>
-                        Combat
+                        Targeting Systems
                     </GridButton>
                     <GridButton
                         disabled={!connected}
-                        icon='explore'
+                        icon='wifi_tethering'
                         size={3}>
-                        Navigation
+                        Industrial
                     </GridButton>
                     <GridButton
                         disabled={!connected}
@@ -73,14 +65,11 @@ class MenuPanel extends Component {
                     <GridButton
                         icon='settings'
                         route='/settings'
-                        color={settingsColor}
+                        highlight={!connected}
                         size={3}>
                         Settings
                     </GridButton>
                 </Grid>
-                { bottomNavbar &&
-                    <div className={classes.spacer}/>
-                }
             </div>
         );
      }
@@ -89,11 +78,8 @@ class MenuPanel extends Component {
 const styles = theme => ({
     container: {
         textAlign: 'center',
-        padding: 80,
+        padding: 0,
         color: theme.palette.text.primary,
-    },
-    spacer: {
-        height: 85,
     },
     grid: {
     },

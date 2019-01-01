@@ -38,33 +38,15 @@ class ThemeSettings extends Component {
         this.props.ThemeStore.applyTheme();
     }
 
-    handleNavbarHide = () => {
-        const value = this.props.ThemeStore.hideNavbar;
-        this.props.ThemeStore.setHideNavbar(!value);
-    }
-
-    handleNavbarPosition = () => {
-        const value = this.props.ThemeStore.bottomNavbar;
-        this.props.ThemeStore.setBottomNavbar(!value);
-    }
-
-    handleNavbarColor = () => {
-        const value = this.props.ThemeStore.themedNavbar;
-        this.props.ThemeStore.setThemedNavbar(!value);
-    }
-
     render () {
         const { classes } = this.props;
         const darkTheme = this.props.ThemeStore.type === 'dark';
-        const hideNavbar = this.props.ThemeStore.hideNavbar;
-        const bottomdNavbar = this.props.ThemeStore.bottomNavbar;
-        const themedNavbar = this.props.ThemeStore.themedNavbar;
 
         return (
             <div className={classes.settings}>
                 <Grid container className={classes.palette} spacing={8}>
                     <Grid item xs={12}>
-                        <Typography className={classes.header} variant="subtitle1" color="primary">Theme settings</Typography>
+                        <Typography className={classes.header} variant="subtitle1" color="primary">Theme</Typography>
                     </Grid>
                     <Grid container className={classes.paletteColumn} item xs={6}>
                         <Typography className={classes.header} variant="caption">Primary color</Typography>
@@ -91,50 +73,6 @@ class ThemeSettings extends Component {
                             label={
                                 <Typography variant="caption">Dark mode</Typography>
                             }/>
-                    </Grid>
-                    <Grid item xs={12}>
-                            <FormControlLabel
-                                className={classes.switch}
-                                labelPlacement="end"
-                                control={
-                                    <Switch
-                                    checked={hideNavbar}
-                                    onChange={this.handleNavbarHide}
-                                    color="primary"/>
-                                }
-                                label={
-                                    <Typography variant="caption">Hide navigation bar</Typography>
-                                }/>
-                    </Grid>
-                    <Grid item xs={12}>
-                            <FormControlLabel
-                                className={classes.switch}
-                                labelPlacement="end"
-                                disabled={hideNavbar}
-                                control={
-                                    <Switch
-                                    checked={bottomdNavbar}
-                                    onChange={this.handleNavbarPosition}
-                                    color="primary"/>
-                                }
-                                label={
-                                    <Typography variant="caption">Bottom navigation bar</Typography>
-                                }/>
-                    </Grid>
-                    <Grid item xs={12}>
-                            <FormControlLabel
-                                className={classes.switch}
-                                labelPlacement="end"
-                                disabled={hideNavbar}
-                                control={
-                                    <Switch
-                                    checked={themedNavbar}
-                                    onChange={this.handleNavbarColor}
-                                    color="primary"/>
-                                }
-                                label={
-                                    <Typography variant="caption" >Colored navigation bar</Typography>
-                                }/>
                     </Grid>
                 </Grid>
             </div>

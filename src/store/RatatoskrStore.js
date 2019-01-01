@@ -3,7 +3,6 @@ import RatatoskrService from '../service/RatatoskrService';
 import LocalStorageService from '../service/LocalStorageService';
 
 class RatatoskrStore {
-    @observable tab = 'core'
     @observable server = '';
     @observable port = 4242;
     @observable connected = true;
@@ -13,16 +12,6 @@ class RatatoskrStore {
     constructor () {
         this.loadConnection();
         this.testConnection();
-        const tab = LocalStorageService.loadTab();
-        if (tab) {
-            this.tab = tab;
-        }
-    }
-
-    @action setTab = (tab) => {
-        console.debug("RatatoskrStore.setTab() :", tab);
-        this.tab = tab;
-        LocalStorageService.saveTab(tab);
     }
 
     @action setServer= (server) => {
