@@ -75,5 +75,16 @@ Ratakoskr(ByRef req, ByRef res) {
 #include, %A_ScriptDir%\lib\AHKsock\AHKsock.ahk
 #include, %A_ScriptDir%\lib\AHKhttp\AHKhttp.ahk
 
-#include, %A_ScriptDir%\cmd\flight.ahk
+#include, %A_ScriptDir%\cmd\flightCockpit.ahk
+#include, %A_ScriptDir%\cmd\flightDefensive.ahk
+#include, %A_ScriptDir%\cmd\flightHud.ahk
+#include, %A_ScriptDir%\cmd\flightLights.ahk
+#include, %A_ScriptDir%\cmd\flightMining.ahk
+#include, %A_ScriptDir%\cmd\flightMovement.ahk
+#include, %A_ScriptDir%\cmd\flightPower.ahk
+#include, %A_ScriptDir%\cmd\flightRadar.ahk
+#include, %A_ScriptDir%\cmd\flightTargeting.ahk
+#include, %A_ScriptDir%\cmd\flightView.ahk
+#include, %A_ScriptDir%\cmd\flightWeapons.ahk
+#include, %A_ScriptDir%\cmd\interactions.ahk
 #include, %A_ScriptDir%\cmd\util.ahk

@@ -13,3 +13,6 @@ Test() {
     message := "Test command executed"
     TrayTip %title%, %message%, 1, 17
 }
+Test2() {
+    Send {n down}{n up}
+}
