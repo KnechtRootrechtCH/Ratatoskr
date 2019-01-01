@@ -24,7 +24,7 @@ class ThemeStore {
 
   @observable advancedMode = false;
 
-  @observable controlsColor = 'inherit';
+  @observable controlsColor = 'primary';
 
   @observable navigationMode = 'menu';
   @observable navbarPosition = 'bottom';
@@ -52,7 +52,10 @@ class ThemeStore {
       this.type = type;
     }
 
-    this.advancedMode = LocalStorageService.loadAdvancedMode();
+    let advancedMode = LocalStorageService.loadAdvancedMode();
+    if (!advancedMode) {
+      this.advancedMode = false;
+    }
 
     const navigationMode = LocalStorageService.loadNavigationMode();
     if (navigationMode) {
