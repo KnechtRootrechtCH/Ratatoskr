@@ -27,12 +27,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className={classes.app}>
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"></link>
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+          <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'></link>
+          <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'></link>
           <MetaTags>
-            <meta name="theme-color" content={navbarColor} />
-            <meta name="msapplication-navbutton-color" content={navbarColor}/>
-            <meta name="apple-mobile-web-app-status-bar-style" content={navbarColor}/>
+            <meta name='theme-color' content={navbarColor} />
+            <meta name='msapplication-navbutton-color' content={navbarColor}/>
+            <meta name='apple-mobile-web-app-status-bar-style' content={navbarColor}/>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
           </MetaTags>
           <MuiThemeProvider theme={theme}>
             <Navigation/>

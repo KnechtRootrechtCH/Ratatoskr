@@ -11,7 +11,7 @@ import {
     Tabs,
     Tab } from '@material-ui/core';
 
-import PanelsService from '../service/PanelsService';
+import PanelService from '../service/PanelService';
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
@@ -33,7 +33,7 @@ class NavigationTabs extends Component {
         const location = this.props.location.pathname.toLowerCase().replace('/', '');
         let tab = false;
 
-        PanelsService.panels.forEach((panel) => {
+        PanelService.panels.forEach((panel) => {
             if(panel.tabs && panel.key === location) {
                 tab = panel.key;
             }
@@ -47,7 +47,7 @@ class NavigationTabs extends Component {
                 indicatorColor={indicatorColor}
                 variant='fullWidth'
                 centered>
-                { PanelsService.panels.map((panel) => {
+                { PanelService.panels.map((panel) => {
                     return (
                         ( panel.tabs && (
                             <Tab
@@ -57,7 +57,12 @@ class NavigationTabs extends Component {
                                 textColor="inherit"
                                 value={panel.key}
                                 label={ showLabels ? panel.shortName : null }
-                                icon={<Icon>{panel.icon}</Icon>}/>
+                                icon={panel.icon ? (
+                                        <Icon>{panel.icon}</Icon>
+                                    ) : (
+                                        <panel.iconComponent/>
+                                    )
+                                }/>
                         ))
                     )
                 })}

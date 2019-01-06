@@ -53,9 +53,7 @@ class ThemeStore {
     }
 
     let advancedMode = LocalStorageService.loadAdvancedMode();
-    if (!advancedMode) {
-      this.advancedMode = false;
-    }
+    this.advancedMode = advancedMode ? true : false; // prevent undefined value
 
     const navigationMode = LocalStorageService.loadNavigationMode();
     if (navigationMode) {
@@ -127,6 +125,9 @@ class ThemeStore {
     const theme = createMuiTheme({
       typography: {
         useNextVariants: true,
+        h6: {
+          textTransform: 'uppercase',
+        },
         subtitle1: {
           textTransform: 'uppercase',
         },

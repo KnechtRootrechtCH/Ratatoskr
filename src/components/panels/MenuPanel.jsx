@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
 import GridButton from '../buttons/GridButton';
 
-import PanelsService from '../../service/PanelsService';
+import PanelService from '../../service/PanelService';
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
@@ -17,7 +17,7 @@ class MenuPanel extends Component {
     render () {
         const { classes } = this.props;
 
-        const panels = PanelsService.panels;
+        const panels = PanelService.panels;
 
         console.debug('MenuPanel.render()');
 
@@ -29,11 +29,8 @@ class MenuPanel extends Component {
                             ( panel.menu && (
                             <GridButton
                                 key={panel.key}
-                                icon={panel.icon}
-                                route={panel.route}
-                                size={3}>
-                                {panel.name}
-                            </GridButton>
+                                panel={panel}
+                                size={3}/>
                             ))
                         )
                     })}
@@ -45,8 +42,15 @@ class MenuPanel extends Component {
 
 const styles = theme => ({
     container: {
+        // vertical center
+        display: 'flex',
+        flex: 1,
+        flexFlow: 'column',
+        justifyContent: 'center',
+        // horizontal center
         textAlign: 'center',
-        padding: 0,
+        // styling
+        padding: 20,
         color: theme.palette.text.primary,
     },
     grid: {

@@ -43,6 +43,11 @@ class SettingsPanel extends Component {
 const styles = {
     container: {
         marginTop: 10,
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center', // horizontal center
+        justifyContent: 'center', // vertical center
     },
 };
 

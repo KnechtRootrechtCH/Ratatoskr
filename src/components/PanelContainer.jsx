@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import ScreenRotationIcon from '@material-ui/icons/ScreenRotation'
 
 import MenuPanel from './panels/MenuPanel';
-import PanelsService from '../service/PanelsService';
+import PanelService from '../service/PanelService';
 
 @inject('RatatoskrStore')
 @inject('ThemeStore')
@@ -29,7 +29,7 @@ class PanelContainer extends Component {
 
         const rotateScreen = !isWidthUp('sm', this.props.width);
 
-        const panels = PanelsService.panels;
+        const panels = PanelService.panels;
 
         return (
             <div className={classes.container}>
@@ -71,8 +71,8 @@ const styles = theme => ({
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center', // horizontal center
-        justifyContent: 'center', // vertical center
+        //alignItems: 'center', // horizontal center
+        //justifyContent: 'center', // vertical center
     },
     spacer: {
         height: 65,

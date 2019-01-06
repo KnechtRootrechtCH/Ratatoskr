@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {inject, observer} from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import Link from 'react-router-dom/Link'
-import PanelsService from '../service/PanelsService'
+import PanelService from '../service/PanelService'
 
 import {
     Icon,
@@ -30,7 +30,7 @@ class NavigationDrawer extends Component {
     render () {
         const classes = this.props.classes;
 
-        const panels = PanelsService.panels;
+        const panels = PanelService.panels;
 
         return (
             <SwipeableDrawer
@@ -51,7 +51,11 @@ class NavigationDrawer extends Component {
                                 component={Link}
                                 to={panel.route}>
                                 <ListItemIcon>
-                                    <Icon className={classes.icon}>{panel.icon}</Icon>
+                                    { panel.icon ? (
+                                        <Icon className={classes.icon}>{panel.icon}</Icon>
+                                    ) : (
+                                        <panel.iconComponent/>
+                                    )}
                                 </ListItemIcon>
                                 <ListItemText primary={panel.name}/>
                             </ListItem>

@@ -11,25 +11,16 @@ import Typography from '@material-ui/core/Typography';
 @inject('ThemeStore')
 @observer
 class AdvancedSettings extends Component {
-    state = {
-        mode: false,
-    };
-
-    componentDidMount() {
-        this.setState({
-            mode: this.props.ThemeStore.advancedMode,
-        })
-    }
 
     handleModeSwitch = () => {
-        const value = !this.state.mode;
-        this.setState({ mode: value });
+        const value = !this.props.ThemeStore.advancedMode;
         this.props.ThemeStore.setAdvancedMode(value);
     }
 
     render () {
         const { classes } = this.props;
 
+        const mode = this.props.ThemeStore.advancedMode;
         let controlsColor = this.props.ThemeStore.controlsColor;
         controlsColor = controlsColor === 'inherit' ? 'default' : controlsColor;
 
@@ -45,7 +36,7 @@ class AdvancedSettings extends Component {
                             labelPlacement="end"
                             control={
                                 <Switch
-                                checked={this.state.mode}
+                                checked={mode}
                                 onChange={this.handleModeSwitch}
                                 color={controlsColor}/>
                             }

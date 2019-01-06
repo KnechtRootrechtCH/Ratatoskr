@@ -7,7 +7,7 @@ import {Icon, Typography} from '@material-ui/core';
 
 @inject('ThemeStore')
 @observer
-class TodoPanel extends Component {
+class PlaceholderPanel extends Component {
     state = {};
 
     render () {
@@ -37,8 +37,8 @@ const styles = theme => ({
     },
 });
 
-TodoPanel.propTypes = {
+PlaceholderPanel.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TodoPanel);
+export default withStyles(styles)(PlaceholderPanel);

@@ -1,8 +1,13 @@
 import MenuPanel from '../components/panels/MenuPanel';
+import CoreSystemsPanel from '../components/panels/CoreSystemsPanel';
+import FlightSystemsPanel from '../components/panels/FlightSystemsPanel';
 import SettingsPanel from '../components/panels/SettingsPanel';
-import TodoPanel from '../components/panels/TodoPanel';
+import PlaceholderPanel from '../components/panels/PlaceholderPanel';
 
-export default class PanelsService {
+import FlightIcon from 'mdi-material-ui/Compass'
+import ShieldsIcon from 'mdi-material-ui/ShieldAirplane'
+
+export default class PanelService {
     static panels = [
         {
             key: 'systems',
@@ -10,21 +15,23 @@ export default class PanelsService {
             shortName: 'Core Systems',
             route: '/systems',
             icon: 'blur_circular',
+            iconComponent: null,
             tabs: true,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: CoreSystemsPanel,
         },
         {
             key: 'flight',
             name: 'Flight & Navigation',
             shortName: 'Flight',
             route: '/flight',
-            icon: 'explorer',
+            icon: null,
+            iconComponent: FlightIcon,
             tabs: true,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: FlightSystemsPanel,
         },
         {
             key: 'power',
@@ -32,21 +39,23 @@ export default class PanelsService {
             shortName: 'Power',
             route: '/power',
             icon: 'battery_charging_full',
+            iconComponent: null,
             tabs: true,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: PlaceholderPanel,
         },
         {
             key: 'shields',
             name: 'Shield Management',
             shortName: 'Shields',
             route: '/shields',
-            icon: 'security',
+            icon: null,
+            iconComponent: ShieldsIcon,
             tabs: true,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: PlaceholderPanel,
         },
         {
             key: 'combat',
@@ -54,10 +63,11 @@ export default class PanelsService {
             shortName: 'Combat',
             route: '/combat',
             icon: 'gps_fixed',
+            iconComponent: null,
             tabs: true,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: PlaceholderPanel,
         },
         {
             key: 'industrial',
@@ -65,10 +75,11 @@ export default class PanelsService {
             shortName: 'Industrial',
             route: '/industrial',
             icon: 'wifi_tethering',
+            iconComponent: null,
             tabs: false,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: PlaceholderPanel,
         },
         {
             key: 'comms',
@@ -76,10 +87,11 @@ export default class PanelsService {
             shortName: 'Comms',
             route: '/comms',
             icon: 'headset',
+            iconComponent: null,
             tabs: false,
             drawer: true,
             menu: true,
-            component: TodoPanel,
+            component: PlaceholderPanel,
         },
         {
             key: 'settings',
@@ -87,6 +99,7 @@ export default class PanelsService {
             shortName: 'Settings',
             route: '/settings',
             icon: 'settings',
+            iconComponent: null,
             tabs: true,
             drawer: true,
             menu: true,
@@ -98,11 +111,25 @@ export default class PanelsService {
             shortName: 'Menu',
             route: '/menu',
             icon: 'home',
+            iconComponent: null,
             tabs: false,
             drawer: false,
             menu: false,
             component: MenuPanel,
         },
     ]
+
+    static get = (key) => {
+        let result = null;
+        if (!key) {
+            return result;
+        }
+        PanelService.panels.forEach(panel => {
+            if (panel.key === key) {
+                result = panel;
+            }
+        });
+        return result;
+    }
 
 }
